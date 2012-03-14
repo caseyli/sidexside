@@ -52,7 +52,7 @@
 	    			<div>
 	    				<h3><%= product.title %></h3>
 	    				<ul class="product-info">
-	    					<li><%= image_tag product.images[0].src unless product.images[0].nil? %></li>
+	    					<li><%= image_tag product.images[0].src, :class => "product-image" unless product.images[0].nil? %></li>
 	    					<li><strong>Type: </strong><%= product.product_type %></li>
 	    					<li><strong>Price Range: </strong><%= product.price_range %></li>
 	    					<li><strong>Vendor: </strong><%= product.vendor %></li>

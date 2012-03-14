@@ -1,22 +1,66 @@
+/* General */
+
+.center-block {
+  display:block;
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+/* Product Select Form */
+.product-select {
+  border-radius: 15px;
+  border: 2px solid;
+  border-color: #555555;
+  background-color: #DDDDDD;
+}
+
+.product-select-table {
+  width: 100%;
+  
+  tr td {
+    padding: 10px;
+    vertical-align: top;
+  }
+  
+  tr td.criteria-column {
+    width: 10%;
+  }
+  
+  tr td.product-column {
+    width: 45%;
+  }
+}
+
 /* Main Compare Panel */
 
-.main-body {
+.main-panel {
   width: 100%;
+  padding:0 10px 0 10px;
 }
 
 .compare-table {
   width: 100%;
   
-  tr.product-select-row td {
-    background-color: #DDDDDD;
+  tr th {
+    background: #000044;
+    color: #ffffff;
   }
   
-  tr td {
-    width: 50%;
+  tr th, tr td {
     padding: 10px;
     vertical-align: top;
   }
   
+  tr th.criteria-column {
+    width: 10%;
+  }
+  
+  tr th.product-column {
+    width: 45%;
+  }
+  
+  tr:nth-child(even) {background: #CCC}
+  tr:nth-child(odd) {background: #EEE}
 }
 
 .product-info {

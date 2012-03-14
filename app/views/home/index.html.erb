@@ -2,13 +2,15 @@
   <div class="inner">
     <div class="container">
       <h1 style="letter-spacing:-3px; margin-bottom:20px;"><%= image_tag 'Logo.png' %></h1>
-      <p class="lead">A simple app to let you <strong>compare</strong> and <strong>merge</strong> information
+      <p class="lead">A simple app to let you <strong>compare</strong> information
       	about your products.</p>
     </div><!-- /container -->
   </div>
 </header>
 
 <div class="row">
+	
+  <!--
   <div class="span3">
   	<div class="well">
   		<strong>Instructions</strong>
@@ -16,53 +18,112 @@
   			It's Simple! Choose 2 products to view information about each.
   		</p>
   	</div>
-  </div> <!-- span3 / left-column -->
+  </div> <!-- span3 / left-column --
+  -->
 
+  <div class="main-panel">
+  	<div class="center-block">
+    	<h2>Product Compare</h2>
+    </div>
 
-  <div class="span8 offset1 main-panel">
-    <h2>Product Compare</h2>
-
-    <table class="compare-table">
-    	<tr class="product-select-row">
-    		<%= form_tag "/home", :method => "post" do %>
-    		<td>
-    			<%= label_tag :product_1_id %>
-    			<%= select_tag :product_1_id, options_from_collection_for_select(@products, "id", "title", :selected => @product1.id) %>			
-    		</td>
-    		<td>
-    			<%= label_tag :product_2_id %>
-    			<%= select_tag :product_2_id, options_from_collection_for_select(@products, "id", "title", :selected => @product2.id) %>
-    			<br/>
-    			<%= submit_tag "Compare" %>
-    		</td>
-    		
-    	</tr>
-    	<tr class="produc">
-    		<td>
+	<%= form_tag "/home", :method => "post" do %>
+		<div class="product-select">
+		    <table class="product-select-table">
+		    	<tr class="product-select-row">
+		    		
+		    		<td class="criteria-column">
+		    			
+		    		</td>
+		    		<td class="product-column">
+		    			<%= label_tag :product_1_id %>
+		    			<%= select_tag :product_1_id, options_from_collection_for_select(@products, "id", "title", :selected => @product1.id) %>			
+		    		</td>
+		    		<td class="product-column">
+		    			<%= label_tag :product_2_id %>
+		    			<%= select_tag :product_2_id, options_from_collection_for_select(@products, "id", "title", :selected => @product2.id) %>
+		    			<br/>
+		    		
+		    		</td>
+		    		
+		    	</tr>
+			</table>
+		</div>
+		<div class="center-block">
+			<%= submit_tag "Compare" %>
+		</div>
+	<% end %>	
+		
+	<table class="compare-table">
+    	<tr>
+    		<th class="criteria-column">
     			
-    		</td>
-    		<td>
-
-    		</td>
-    		<% end %>
+    		</th>
+    		<th class="product-column">
+    			<%= @product1.title %>
+    		</th>
+    		<th class="product-column">
+    			<%= @product2.title %>
+    		</th>
     	</tr>
     	<tr>
-    		<% @products_to_compare.each do |product| %>
-	    		<td>
-	    			<div>
-	    				<h3><%= product.title %></h3>
-	    				<ul class="product-info">
-	    					<li><%= image_tag product.images[0].src, :class => "product-image" unless product.images[0].nil? %></li>
-	    					<li><strong>Type: </strong><%= product.product_type %></li>
-	    					<li><strong>Price Range: </strong><%= product.price_range %></li>
-	    					<li><strong>Vendor: </strong><%= product.vendor %></li>
-	    					<li><strong>Description: </strong><%= raw(product.body_html) %></li>
-	    				</ul>	
-	    			</div>
-	    		</td>
-	    	<% end %>
+    		<td>
+    			<strong>Image: </strong>
+    		</td>
+    		<td>
+    			<div class='center-block'>
+    				<%= image_tag @product1.images[0].src, :class => "product-image" unless @product1.images[0].nil? %>
+    			</div>
+    		</td>
+    		<td>
+    			<div class='center-block'>
+    				<%= image_tag @product2.images[0].src, :class => "product-image" unless @product2.images[0].nil? %>
+    			</div>
+    		</td>
     	</tr>
-    
+    	<tr>
+    		<td>
+				<strong>Type: </strong>    			
+    		</td>
+    		<td>
+    			<%= @product1.product_type %>
+    		</td>
+    		<td>
+    			<%= @product2.product_type %>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<strong>Price Range: </strong>
+    		</td>
+    		<td>
+    			<%= @product1.price_range %>
+    		</td>
+    		<td>
+    			<%= @product2.price_range %>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<strong>Vendor: </strong>
+    		</td>
+    		<td>
+    			<%= @product1.vendor %>
+    		</td>
+    		<td>
+    			<%= @product2.vendor %>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<strong>Desc: </strong>
+    		</td>
+    		<td>
+    			<%= raw(@product1.body_html) %>
+    		</td>
+    		<td>
+    			<%= raw(@product2.body_html) %>
+    		</td>
+    	</tr>
     </table>
   </div> <!-- span8 / right-column -->
 </div>

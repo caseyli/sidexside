@@ -1,0 +1,30 @@
+#postgres database
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: sidexside_test
+  pool: 5
+  username: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: sidexside
+  pool: 5
+  username: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432
+  
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: sidexside
+  pool: 5
+  username: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432

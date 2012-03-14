@@ -8,22 +8,17 @@ class HomeController < ApplicationController
   end
   
   def index
-    # get 5 products
+    # get 10 products
     @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
-    @product1 = @products[0]
-    @product2 = @products[1]
-    
-    if request.post?
-      @product1 = ShopifyAPI::Product.find(params[:product_1_id]) unless params[:product_1_id].nil?
-      @product2 = ShopifyAPI::Product.find(params[:product_2_id]) unless params[:product_2_id].nil?
+    unless @products.empty?
+      @product1 = @products[0]
+      @product2 = @products[0]      
     end
-    
-    @products_to_compare = []
-    @products_to_compare << @product1
-    @products_to_compare << @product2
 
-    # get latest 5 orders
-    @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 5, :order => "created_at DESC" })
-  end
+      if request.post?
+        @product1 = ShopifyAPI::Product.find(params[:product_1_id]) unless params[:product_1_id].nil?
+        @product2 = ShopifyAPI::Product.find(params[:product_2_id]) unless params[:product_2_id].nil?
+      end
+    end
   
 end

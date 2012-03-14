@@ -1,0 +1,44 @@
+/* Main Compare Panel */
+
+.main-body {
+  width: 100%;
+}
+
+.compare-table {
+  width: 100%;
+  
+  tr.product-select-row td {
+    background-color: #DDDDDD;
+  }
+  
+  tr td {
+    width: 50%;
+    padding: 10px;
+    vertical-align: top;
+  }
+  
+}
+
+.product-info {
+  
+}
+
+ul.product-info {
+  margin-left: 0;
+}
+
+ul.product-info li {
+  list-style-type: none;
+  display:block;
+  padding: 10px;
+  color: black;
+  margin-left: -10px;
+}
+
+ul.product-info li:nth-child(odd) { 
+  background-color:#DDDDDD; 
+}
+
+ul.product-info li:nth-child(even) { 
+  background-color:#EEEEEE; 
+}

@@ -1,4 +1,6 @@
 Sidexside::Application.routes.draw do
+  match '/home'              => 'home#index'
+  
   match 'welcome'            => 'home#welcome'
 
   match 'design'             => 'home#design'

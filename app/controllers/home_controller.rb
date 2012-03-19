@@ -8,17 +8,31 @@ class HomeController < ApplicationController
   end
   
   def index
+    @show_logo = true
+    @header_sub_message = 'A simple app to let you <strong>compare</strong> information
+            about your products.'
+    
+    
+  end
+  
+  def compare_products
+    @header_message = '<strong>Compare Products</strong>'
+    
     # get 10 products
-    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
+    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 100})
     unless @products.empty?
       @product1 = @products[0]
       @product2 = @products[0]      
     end
 
-      if request.post?
-        @product1 = ShopifyAPI::Product.find(params[:product_1_id]) unless params[:product_1_id].nil?
-        @product2 = ShopifyAPI::Product.find(params[:product_2_id]) unless params[:product_2_id].nil?
-      end
+    if request.post?
+      @product1 = ShopifyAPI::Product.find(params[:product_1_id]) unless params[:product_1_id].nil?
+      @product2 = ShopifyAPI::Product.find(params[:product_2_id]) unless params[:product_2_id].nil?
     end
+  end
+  
+  def compare_variants
+    @header_message = '<strong>Compare Variants</strong>'
+  end
   
 end

@@ -6,6 +6,14 @@
   padding: 10px 0 10px 0;
 }
 
+.center {
+  margin: 0px auto;
+}
+
+.btn-mega {
+  font-size: 4em;
+}
+
 /* Product Select Form */
 .product-select {
   border-radius: 15px;
@@ -31,12 +39,17 @@
   }
 }
 
-/* Main Compare Panel */
 
-.main-panel {
-  width: 100%;
-  padding:0 10px 0 10px;
+/* Header */
+.logo {
+  width: 50%;
 }
+
+.small-logo {
+  width: 10%;
+}
+
+/* Main Compare Panel */
 
 .compare-table {
   width: 100%;

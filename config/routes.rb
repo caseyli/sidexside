@@ -1,19 +1,18 @@
 Sidexside::Application.routes.draw do
   match '/home'              => 'home#index'
-  
   match 'welcome'            => 'home#welcome'
-
   match 'design'             => 'home#design'
-
   match 'login'              => 'login#index',        :as => :login
-
   match 'login/authenticate' => 'login#authenticate', :as => :authenticate
-
   match 'login/finalize'     => 'login#finalize',     :as => :finalize
-
   match 'login/logout'       => 'login#logout',       :as => :logout
-
+  
+  match '/compare_products'  => 'home#compare_products'
+  match '/compare_variants'  => 'home#compare_variants'
+  
   root :to                   => 'home#index'
+
+  match '/:controller/:action'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

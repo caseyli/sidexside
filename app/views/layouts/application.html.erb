@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>sidexside | shopify app</title>
-  <%= stylesheet_link_tag 'application' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  
-  <!-- icons -->
-  <link rel="shortcut icon" href="../assets/favicon.png">
-  <link rel="apple-touch-icon" href="../assets/shopify-57.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="../assets/shopify-72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="../assets/shopify-114.png">
-  
-  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-
-<body>
-  
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        
-        <%= link_to 'sidexside', '/', :class => 'brand' %>
-        
-        <% if current_shop %>
-          <div class="nav-collapse">
-            <ul class="nav">
-            </ul>
-          </div>
-          
-          <ul class="nav pull-right">
-            <li class="dropdown">
-              <%= link_to raw(current_shop.url+' <b class="caret"></b>'), "https://#{current_shop.url}", :class => 'shop_name dropdown-toggle', :'data-toggle' => 'dropdown'  %>
-              <ul class="dropdown-menu">
-                <li><%= link_to raw('<i class="icon-home"></i> Storefront'), "http://"+current_shop.url, :target => 'blank' %></li>
-                <li><%= link_to raw('<i class="icon-cog"></i> Shopify Admin'), "http://"+current_shop.url+"/admin", :target => 'blank' %></li>
-                <li class="divider"></li>
-                <li><%= link_to raw('<i class="icon-off"></i> logout'), logout_path %></li>
-              </ul>
-            </li>
-          </ul>
-        <% end %>
-        
-      </div>
-    </div>
-  </div>
-  
-  
-  <div class="container">
-    
-    <div class="content">
-      <%= yield %>
-    </div>
-    
-    <footer>
-      <p>A Shopify app by Casey Li</p>
-    </footer>
-    
-  </div> <!-- /container -->
-</body>
+	<head>
+		<title>sidexside | shopify app</title>
+		<%= stylesheet_link_tag 'application' %>
+		<%= javascript_include_tag 'application' %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<!-- icons -->
+		<link rel="shortcut icon" href="../assets/favicon.png">
+		<link rel="apple-touch-icon" href="../assets/shopify-57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../assets/shopify-72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../assets/shopify-114.png">
+		<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<ul class='nav pull-right'>
+						<li class="dropdown">
+							<a class="btn btn-navbar dropdown-toggle" data-toggle="dropdown"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+							<ul class='dropdown-menu'>
+								<li>
+									<%= link_to 'Compare Products', '/compare_products', :class => 'active' %>
+								</li>
+								<li>
+									<%= link_to 'Compare Variants', '/compare_variants', :class => 'active' %>
+								</li>
+								<li>
+									<%= link_to 'Home', root_path, :class => 'active' %>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<%= link_to image_tag("Chicklet.png"), '/', :class => 'brand' %>
+					<% if current_shop %>
+					<div class="nav-collapse">
+						<ul class="nav"></ul>
+					</div>
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<%= link_to raw(current_shop.url+' <b class="caret"></b>'), "https://#{current_shop.url}", :class => 'shop_name dropdown-toggle', :'data-toggle' => 'dropdown'  %>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to raw('<i class="icon-home"></i> Storefront'), "http://"+current_shop.url, :target => 'blank' %>
+								</li>
+								<li>
+									<%= link_to raw('<i class="icon-cog"></i> Shopify Admin'), "http://"+current_shop.url+"/admin", :target => 'blank' %>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<%= link_to raw('<i class="icon-off"></i> logout'), logout_path %>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="content">
+				<header class="jumbotron">
+					<div class="inner">
+						<div class="container">
+							<h1 style="letter-spacing:-3px; margin-bottom:20px;"> <% if @show_logo %>
+							<%= image_tag 'Logo.png', :class => "logo" %>
+							<% else %>
+							<%= raw @header_message %>
+							<% end %> </h1>
+							<p class="lead">
+								<%= raw @header_sub_message %>
+							</p>
+						</div><!-- /container -->
+					</div>
+				</header>
+				<%= yield %>
+			</div>
+			<footer>
+				<p>
+					A Shopify app by Casey Li
+				</p>
+			</footer>
+		</div>
+		<!-- /container -->
+	</body>
 </html>

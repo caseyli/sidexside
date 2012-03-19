@@ -1,0 +1,75 @@
+<div class="row">
+	<div class="span2">
+		<div class="well">
+			<strong>Instructions</strong>
+			<p>
+				It's Simple! Choose 2 products to view information about each.
+			</p>
+		</div>
+	</div>
+	<div class="main-panel span10">
+		<% unless cant_compare? %>
+		<%= form_tag "/home", :method => "post" do %>
+		<div class="product-select">
+			<table class="product-select-table">
+				<tr class="product-select-row">
+					<td class="criteria-column"></td>
+					<td class="product-column"> <%= label_tag :product_1_id %>
+					<%= select_tag :product_1_id, options_from_collection_for_select(@products, "id", "title", :selected => @product1.id) %> </td>
+					<td class="product-column"> <%= label_tag :product_2_id %>
+					<%= select_tag :product_2_id, options_from_collection_for_select(@products, "id", "title", :selected => @product2.id) %>
+					<br/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="center-block">
+			<%= submit_tag "Compare", :class => "btn btn-primary" %>
+		</div>
+		<% end %>
+		<table class="compare-table">
+			<tr>
+				<th class="criteria-column"></th>
+				<th class="product-column"> <%= @product1.title %> </th>
+				<th class="product-column"> <%= @product2.title %> </th>
+			</tr>
+			<tr>
+				<td><strong>Image: </strong></td>
+				<td>
+				<div class='center-block'>
+					<%= image_tag @product1.images[0].src, :class => "product-image" unless @product1.images[0].nil? %>
+				</div></td>
+				<td>
+				<div class='center-block'>
+					<%= image_tag @product2.images[0].src, :class => "product-image" unless @product2.images[0].nil? %>
+				</div></td>
+			</tr>
+			<tr>
+				<td><strong>Type: </strong></td>
+				<td> <%= @product1.product_type %> </td>
+				<td> <%= @product2.product_type %> </td>
+			</tr>
+			<tr>
+				<td><strong>Price Range: </strong></td>
+				<td> <%= @product1.price_range %> </td>
+				<td> <%= @product2.price_range %> </td>
+			</tr>
+			<tr>
+				<td><strong>Vendor: </strong></td>
+				<td> <%= @product1.vendor %> </td>
+				<td> <%= @product2.vendor %> </td>
+			</tr>
+			<tr>
+				<td><strong>Desc: </strong></td>
+				<td> <%= raw(@product1.body_html) %> </td>
+				<td> <%= raw(@product2.body_html) %> </td>
+			</tr>
+		</table>
+		<% else %>
+		<div class='center-block'>
+			<h1>Your store has <strong>less than 2 products</strong> so there's nothing to compare!</h1>
+		</div>
+		<% end %>
+	</div>
+	<!-- main panel -->
+</div><!-- row -->

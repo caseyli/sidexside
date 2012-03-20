@@ -65,20 +65,22 @@
 		</div>
 		<div class="container">
 			<div class="content">
-				<header class="jumbotron">
-					<div class="inner">
-						<div class="container">
-							<h1 style="letter-spacing:-3px; margin-bottom:20px;"> <% if @show_logo %>
-							<%= image_tag 'Logo.png', :class => "logo" %>
-							<% else %>
-							<%= raw @header_message %>
-							<% end %> </h1>
-							<p class="lead">
-								<%= raw @header_sub_message %>
-							</p>
-						</div><!-- /container -->
-					</div>
-				</header>
+				<% unless @hide_jumbotron %>
+					<header class="jumbotron">
+						<div class="inner">
+							<div class="container">
+								<h1 style="letter-spacing:-3px; margin-bottom:20px;"> <% if @show_logo %>
+								<%= image_tag 'Logo.png', :class => "logo" %>
+								<% else %>
+								<%= raw @header_message %>
+								<% end %> </h1>
+								<p class="lead">
+									<%= raw @header_sub_message %>
+								</p>
+							</div><!-- /container -->
+						</div>
+					</header>
+				<% end %>
 				<%= yield %>
 			</div>
 			<footer>

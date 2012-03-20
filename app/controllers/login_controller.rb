@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
   def index
+    @hide_jumbotron = true
     # Ask user for their #{shop}.myshopify.com address
     
     # If the #{shop}.myshopify.com address is already provided in the URL, just skip to #authenticate

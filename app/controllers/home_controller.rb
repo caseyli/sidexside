@@ -18,7 +18,7 @@ class HomeController < ApplicationController
   def compare_products
     @header_message = '<strong>Compare Products</strong>'
     
-    # get 10 products
+    # get 100 products
     @products = ShopifyAPI::Product.find(:all, :params => {:limit => 100})
     unless @products.empty?
       @product1 = @products[0]

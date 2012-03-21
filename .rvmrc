@@ -1,0 +1,3 @@
+rvm use r193
+rvm gemset use rails311
+

@@ -33,6 +33,16 @@ class HomeController < ApplicationController
   
   def compare_variants
     @header_message = '<strong>Compare Variants</strong>'
+    
+    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 100})
+    unless @products.empty?
+      @product = @products[0]
+      @variants = ShopifyAPI::Product.find(@product.id).variants
+    end
+    
+    if request.post?
+      @product = ShopifyAPI::Product.find(params[:product_id]) unless params[:product_id].nil?
+    end
   end
   
 end

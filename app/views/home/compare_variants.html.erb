@@ -8,79 +8,105 @@
 		</div>
 	</div>
 	<div class='main-panel span10'>
-		<% unless cant_compare? %>
-			<%= form_tag "/compare_variants", :method => "post" do %>
-				<div class="product-select">
-					<table class="product-select-table">
-						<tr class="product-select-row">
-							<td class="criteria-column"></td>
-							<td class="product-column"> 
-								<%= label_tag :product_id %>
-								<%= select_tag :product_id, options_from_collection_for_select(@products, "id", "title", :selected => @product.id) %> </td>
-							<td class="product-column">
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="product-select">
-					<table class="product-select-table">
-						<tr class="product-select-row">
-							<td class="criteria-column"></td>
-							<td class="product-column"> <%= label_tag :variant_1_id %>
-							<%= select_tag :variant_1_id, options_from_collection_for_select(@variants, "id", "title") %> </td>
-							<td class="product-column"> <%= label_tag :variant_2_id %>
-							<%= select_tag :variant_2_id, options_from_collection_for_select(@variants, "id", "title") %>
-							<br/>
-							</td>
-						</tr>
-					</table>
-				</div>
-			<% end %>
-			<table class="compare-table">
-				<tr>
-					<th class="criteria-column"></th>
-					<th class="product-column" id='variant_1_header'></th>
-					<th class="product-column" id='variant_2_header'></th>
-				</tr>
-				<tr>
-					<td><strong>Price:</strong></td>
-					<td id='variant_1_price'></td>
-					<td id='variant_2_price'></td>
-				</tr>
-				<tr>
-					<td><strong>Requires Shipping:</strong></td>
-					<td id='variant_1_requires_shipping'></td>
-					<td id='variant_2_requires_shipping'></td>
-				</tr>
-				<tr>
-					<td><strong>Inventory Quantity:</strong></td>
-					<td id='variant_1_inventory_quantity'></td>
-					<td id='variant_2_inventory_quantity'></td>
+		<%= form_tag "/compare_variants", :method => "post" do %>
+		<div class="product-select">
+			<table class="product-select-table">
+				<tr class="product-select-row">
+					<td class="criteria-column"></td>
+					<td class="product-column"> <%= label_tag :product_id %>
+					<%= select_tag :product_id %> </td>
+					<td class="product-column"></td>
 				</tr>
 			</table>
-		<% else %>
-			<div class='center-block'>
-				<h1>Your store has <strong>less than 2 products</strong> so there's nothing to compare!</h1>
-			</div>
+		</div>
+		<div class="product-select">
+			<table class="product-select-table">
+				<tr class="product-select-row">
+					<td class="criteria-column"></td>
+					<td class="product-column"> <%= label_tag :variant_1_id %>
+					<%= select_tag :variant_1_id %> </td>
+					<td class="product-column"> <%= label_tag :variant_2_id %>
+					<%= select_tag :variant_2_id %>
+					<br/>
+					</td>
+				</tr>
+			</table>
+		</div>
 		<% end %>
+		<table class="compare-table">
+			<tr>
+				<th class="criteria-column"></th>
+				<th class="product-column" id='variant_1_header'></th>
+				<th class="product-column" id='variant_2_header'></th>
+			</tr>
+			<tr>
+				<td><strong>Price:</strong></td>
+				<td id='variant_1_price'></td>
+				<td id='variant_2_price'></td>
+			</tr>
+			<tr>
+				<td><strong>Requires Shipping:</strong></td>
+				<td id='variant_1_requires_shipping'></td>
+				<td id='variant_2_requires_shipping'></td>
+			</tr>
+			<tr>
+				<td><strong>Inventory Quantity:</strong></td>
+				<td id='variant_1_inventory_quantity'></td>
+				<td id='variant_2_inventory_quantity'></td>
+			</tr>
+		</table>
 	</div>
 </div>
-
 <script type='text/javascript'>
-
-	$(function(){
+	$(function() {
+		retrieveProducts(false);
+		retrieveVariants(false);
 		retrieveVariant("1");
 		retrieveVariant("2");
 	});
 
-	$("#product_id").change(function(){
+	$("#product_id").change(function() {
+		retrieveVariants(true);
+	});
+	
+	$("#variant_1_id").change(function() {
+		retrieveVariant("1");
+	});
+
+	$("#variant_2_id").change(function() {
+		retrieveVariant("2");
+	});
+	
+	function retrieveProducts(async) {
 		$.ajax({
-			url: "/variants/index",
+			async: async,
+			url: "/products/index",
 			dataType: "json",
-			data: { product : $("#product_id").val() },
 			success: function(data, textStatus, jqXHR) {
 				ihtml = "";
 				jQuery.each(data, function(){
+					ihtml += "<option value='" + this.id + "'>" + this.title + "</option>";
+				});
+				
+				$("#product_id").html(ihtml);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, there was an error trying to retrieve product information.");
+			}
+		});	
+	}
+	
+	function retrieveVariants(async) {
+		$.ajax({
+			url : "/variants/index",
+			dataType : "json",
+			async: async,
+			data : {
+				product : $("#product_id").val()
+			},
+			success : function(data, textStatus, jqXHR) {
+				ihtml = "";
+				jQuery.each(data, function() {
 					ihtml += "<option value='" + this.id + "'>" + this.title + "</option>";
 				});
 				$("#variant_1_id").html(ihtml);
@@ -88,39 +114,33 @@
 				retrieveVariant("1");
 				retrieveVariant("2");
 			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				alert("Sorry, there was an error trying to retrieve variants information.");
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, there was an error trying to retrieve variants information." + errorThrown + $("#product_id").val());
 			}
-			
 		});
-	});
-	
-	$("#variant_1_id").change(function(){
-		retrieveVariant("1");
-	});
-	
-	$("#variant_2_id").change(function(){
-		retrieveVariant("2");
-	});
-	
-	function retrieveVariant(variant) {
+	}
+
+
+	function retrieveVariant(variant_number) {
 		$.ajax({
-			url: "/variants/show",
-			dataType: "json",
-			data: { id : $("#variant_" + variant + "_id").val() },
-			success: function(data, textStatus, jqXHR) {
-				loadVariant(variant, data);
+			url : "/variants/show",
+			dataType : "json",
+			data : {
+				id : $("#variant_" + variant_number + "_id").val()
 			},
-			error: function(jqXHR, textStatus, errorThrown) {
+			success : function(data, textStatus, jqXHR) {
+				loadVariant(variant_number, data);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
 				alert("Sorry, there was an error trying to retrieve variants information.");
 			}
 		});
 	}
-	
-	function loadVariant(variant, data) {
-		$("#variant_" + variant + "_header").html(data.title);
-		$("#variant_" + variant + "_price").html(data.price);
-		$("#variant_" + variant + "_requires_shipping").html(data.requires_shipping);
-		$("#variant_" + variant + "_inventory_quantity").html(data.inventory_quantity);
+
+	function loadVariant(variant_number, data) {
+		$("#variant_" + variant_number + "_header").html(data.title);
+		$("#variant_" + variant_number + "_price").html(data.price);
+		$("#variant_" + variant_number + "_requires_shipping").html(data.requires_shipping);
+		$("#variant_" + variant_number + "_inventory_quantity").html(data.inventory_quantity);
 	}
 </script>

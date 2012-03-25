@@ -8,68 +8,118 @@
 		</div>
 	</div>
 	<div class="main-panel span10">
-		<% unless cant_compare? %>
 		<%= form_tag "/compare_products", :method => "post" do %>
 		<div class="product-select">
 			<table class="product-select-table">
 				<tr class="product-select-row">
 					<td class="criteria-column"></td>
 					<td class="product-column"> <%= label_tag :product_1_id %>
-					<%= select_tag :product_1_id, options_from_collection_for_select(@products, "id", "title", :selected => @product1.id) %> </td>
+					<%= select_tag :product_1_id %> </td>
 					<td class="product-column"> <%= label_tag :product_2_id %>
-					<%= select_tag :product_2_id, options_from_collection_for_select(@products, "id", "title", :selected => @product2.id) %>
-					<br/>
+					<%= select_tag :product_2_id %>
 					</td>
 				</tr>
 			</table>
-		</div>
-		<div class="center-block">
-			<%= submit_tag "Compare", :class => "btn btn-primary" %>
 		</div>
 		<% end %>
 		<table class="compare-table">
 			<tr>
 				<th class="criteria-column"></th>
-				<th class="product-column"> <%= @product1.title %> </th>
-				<th class="product-column"> <%= @product2.title %> </th>
+				<th class="product-column" id="product_1_header"></th>
+				<th class="product-column" id="product_2_header"></th>
 			</tr>
 			<tr>
 				<td><strong>Image: </strong></td>
-				<td>
-				<div class='center-block'>
-					<%= image_tag @product1.images[0].src, :class => "product-image" unless @product1.images[0].nil? %>
-				</div></td>
-				<td>
-				<div class='center-block'>
-					<%= image_tag @product2.images[0].src, :class => "product-image" unless @product2.images[0].nil? %>
-				</div></td>
+				<td><div class='center-block' id="product_1_image"></div></td>
+				<td><div class='center-block' id="product_2_image"></div></td>
 			</tr>
 			<tr>
 				<td><strong>Type: </strong></td>
-				<td> <%= @product1.product_type %> </td>
-				<td> <%= @product2.product_type %> </td>
+				<td id="product_1_product_type"></td>
+				<td id="product_2_product_type"></td>
 			</tr>
 			<tr>
 				<td><strong>Price Range: </strong></td>
-				<td> <%= @product1.price_range %> </td>
-				<td> <%= @product2.price_range %> </td>
+				<td id="product_1_price_range"></td>
+				<td id="product_2_price_range"></td>
 			</tr>
 			<tr>
 				<td><strong>Vendor: </strong></td>
-				<td> <%= @product1.vendor %> </td>
-				<td> <%= @product2.vendor %> </td>
+				<td id="product_1_vendor"></td>
+				<td id="product_2_vendor"></td>
 			</tr>
 			<tr>
 				<td><strong>Desc: </strong></td>
-				<td> <%= raw(@product1.body_html) %> </td>
-				<td> <%= raw(@product2.body_html) %> </td>
+				<td id="product_1_body_html"></td>
+				<td id="product_2_body_html"></td>
 			</tr>
 		</table>
-		<% else %>
-		<div class='center-block'>
-			<h1>Your store has <strong>less than 2 products</strong> so there's nothing to compare!</h1>
-		</div>
-		<% end %>
 	</div>
 	<!-- main panel -->
 </div><!-- row -->
+
+<!-- TODO: Move this to approropiate file later -->
+<script type="text/javascript">
+	$(function(){
+		retrieveProducts();
+		
+	});
+	
+	function retrieveProducts() {
+		$.ajax({
+			url: "/products/index",
+			dataType: "json",
+			success: function(data, textStatus, jqXHR) {
+				ihtml = "";
+				jQuery.each(data, function(){
+					ihtml += "<option value='" + this.id + "'>" + this.title + "</option>";
+				});
+				
+				$("#product_1_id").html(ihtml);
+				$("#product_2_id").html(ihtml);
+				retrieveProduct("1");
+				retrieveProduct("2");
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, there was an error trying to retrieve product information.");
+			}
+		});	
+	}
+	
+	$("#product_1_id").change(function(){
+		retrieveProduct("1");
+	});
+	
+	$("#product_2_id").change(function(){
+		retrieveProduct("2");
+	});
+	
+	function retrieveProduct(product_number) {
+		$.ajax({
+			url: "/products/show",
+			dataType: "json",
+			data: { id : $("#product_" + product_number + "_id").val() },
+			success: function(data, textStatus, jqXHR) {
+				loadProduct(product_number, data);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, there was an error trying to retrieve product information.");
+			}
+		});
+	}
+	
+	function loadProduct(product_number, data) {
+		$("#product_" + product_number + "_header").html(data.title);
+		
+		if(data.images.length > 0){
+			ihtml = "<img src='" + data.images[0].src + "' class='product-image' />";
+			$("#product_" + product_number + "_image").html(ihtml);
+		}
+		
+		$("#product_" + product_number + "_product_type").html(data.product_type);
+		$("#product_" + product_number + "_price_range").html(data.price_range);
+		$("#product_" + product_number + "_vendor").html(data.vendor);
+		$("#product_" + product_number + "_body_html").html(data.body_html);
+	}
+	
+</script>

@@ -2,7 +2,7 @@ class VariantsController < ApplicationController
   
   respond_to :json
   
-  around_filter :shopify_session, :except => 'welcome'
+  around_filter :shopify_session
   
   def index
     @variants = ShopifyAPI::Product.find(params[:product]).variants

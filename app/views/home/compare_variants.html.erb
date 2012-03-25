@@ -59,88 +59,22 @@
 </div>
 <script type='text/javascript'>
 	$(function() {
-		retrieveProducts(false);
-		retrieveVariants(false);
-		retrieveVariant("1");
-		retrieveVariant("2");
+		retrieveProductsAndLoadSelect(false, ["#product_id"]);
+		retrieveVariantsAndLoadSelect(false, ["#variant_1_id", "#variant_2_id"]);
+		
+		retrieveVariantAndLoadData(true, $("#variant_1_id").val(), "1");
+		retrieveVariantAndLoadData(true, $("#variant_2_id").val(), "2");
 	});
 
 	$("#product_id").change(function() {
-		retrieveVariants(true);
+		retrieveVariantsAndLoadSelect(false, ["#variant_1_id", "#variant_2_id"]);
 	});
 	
 	$("#variant_1_id").change(function() {
-		retrieveVariant("1");
+		retrieveVariantAndLoadData(true, $("#variant_1_id").val(), "1");
 	});
 
 	$("#variant_2_id").change(function() {
-		retrieveVariant("2");
+		retrieveVariantAndLoadData(true, $("#variant_2_id").val(), "2");
 	});
-	
-	function retrieveProducts(async) {
-		$.ajax({
-			async: async,
-			url: "/products/index",
-			dataType: "json",
-			success: function(data, textStatus, jqXHR) {
-				ihtml = "";
-				jQuery.each(data, function(){
-					ihtml += "<option value='" + this.id + "'>" + this.title + "</option>";
-				});
-				
-				$("#product_id").html(ihtml);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				alert("Sorry, there was an error trying to retrieve product information.");
-			}
-		});	
-	}
-	
-	function retrieveVariants(async) {
-		$.ajax({
-			url : "/variants/index",
-			dataType : "json",
-			async: async,
-			data : {
-				product : $("#product_id").val()
-			},
-			success : function(data, textStatus, jqXHR) {
-				ihtml = "";
-				jQuery.each(data, function() {
-					ihtml += "<option value='" + this.id + "'>" + this.title + "</option>";
-				});
-				$("#variant_1_id").html(ihtml);
-				$("#variant_2_id").html(ihtml);
-				retrieveVariant("1");
-				retrieveVariant("2");
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("Sorry, there was an error trying to retrieve variants information." + errorThrown + $("#product_id").val());
-			}
-		});
-	}
-
-
-	function retrieveVariant(variant_number) {
-		$.ajax({
-			url : "/variants/show",
-			dataType : "json",
-			data : {
-				id : $("#variant_" + variant_number + "_id").val()
-			},
-			success : function(data, textStatus, jqXHR) {
-				loadVariant(variant_number, data);
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("Sorry, there was an error trying to retrieve variants information.");
-			}
-		});
-	}
-
-	function loadVariant(variant_number, data) {
-		$("#variant_" + variant_number + "_header").html(data.title);
-		$("#variant_" + variant_number + "_price").html(data.price);
-		$("#variant_" + variant_number + "_requires_shipping").html(data.requires_shipping);
-		$("#variant_" + variant_number + "_inventory_quantity").html(data.inventory_quantity);
-	}
 </script>

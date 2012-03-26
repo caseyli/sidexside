@@ -25,8 +25,8 @@
 		<table class="compare-table">
 			<tr>
 				<th class="criteria-column"></th>
-				<th class="product-column" id="product_1_header"></th>
-				<th class="product-column" id="product_2_header"></th>
+				<th class="product-column" id="product_1_header"><%= loader %></th>
+				<th class="product-column" id="product_2_header"><%= loader %></th>
 			</tr>
 			<tr>
 				<td><strong>Image: </strong></td>
@@ -64,14 +64,16 @@
 		var products = retrieveProductsAndLoadSelect(false, ["#product_1_id", "#product_2_id"]);
 		
 		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
-		retrieveProductAndLoadData(true, $("#product_1_id").val(), "2");
+		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
 	});
 	
 	$("#product_1_id").change(function(){
+		$("#product_1_header").html('<%= loader %>');
 		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
 	});
 	
 	$("#product_2_id").change(function(){
+		$("#product_2_header").html('<%= loader %>');
 		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
 	});
 </script>

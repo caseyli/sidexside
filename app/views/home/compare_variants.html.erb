@@ -36,8 +36,8 @@
 		<table class="compare-table">
 			<tr>
 				<th class="criteria-column"></th>
-				<th class="product-column" id='variant_1_header'></th>
-				<th class="product-column" id='variant_2_header'></th>
+				<th class="product-column" id='variant_1_header'><%= loader %></th>
+				<th class="product-column" id='variant_2_header'><%= loader %></th>
 			</tr>
 			<tr>
 				<td><strong>Price:</strong></td>
@@ -67,14 +67,21 @@
 	});
 
 	$("#product_id").change(function() {
+		$("#variant_1_header").html('<%= loader %>');
+		$("#variant_2_header").html('<%= loader %>');
+		
 		retrieveVariantsAndLoadSelect(false, ["#variant_1_id", "#variant_2_id"]);
+		retrieveVariantAndLoadData(true, $("#variant_1_id").val(), "1");
+		retrieveVariantAndLoadData(true, $("#variant_2_id").val(), "2");
 	});
 	
 	$("#variant_1_id").change(function() {
+		$("#variant_1_header").html('<%= loader %>');
 		retrieveVariantAndLoadData(true, $("#variant_1_id").val(), "1");
 	});
 
 	$("#variant_2_id").change(function() {
+		$("#variant_2_header").html('<%= loader %>');
 		retrieveVariantAndLoadData(true, $("#variant_2_id").val(), "2");
 	});
 </script>

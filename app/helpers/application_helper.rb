@@ -1,7 +1,7 @@
 module ApplicationHelper
   
-  def cant_compare?
-    @products.empty? or @products.size == 1
+  def loader
+    image_tag "ajax-loader.gif"
   end
   
 end

@@ -15,11 +15,14 @@
 					<td class="criteria-column"></td>
 					<td class="product-column"> <%= label_tag :product_id %>
 					<%= select_tag :product_id %> </td>
-					<td class="product-column"></td>
+					<td class="product-column">
+						<div id='product_image'>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
-		<div class="product-select">
+		<div class="variant-select">
 			<table class="product-select-table">
 				<tr class="product-select-row">
 					<td class="criteria-column"></td>
@@ -60,6 +63,7 @@
 <script type='text/javascript'>
 	$(function() {
 		retrieveProductsAndLoadSelect(false, ["#product_id"]);
+		retrieveProductImageAndLoad($("#product_id").val(), "#product_image");
 		retrieveVariantsAndLoadSelect(false, ["#variant_1_id", "#variant_2_id"]);
 		
 		retrieveVariantAndLoadData(true, $("#variant_1_id").val(), "1");
@@ -67,6 +71,8 @@
 	});
 
 	$("#product_id").change(function() {
+		retrieveProductImageAndLoad($("#product_id").val(), "#product_image");
+		
 		$("#variant_1_header").html('<%= loader %>');
 		$("#variant_2_header").html('<%= loader %>');
 		

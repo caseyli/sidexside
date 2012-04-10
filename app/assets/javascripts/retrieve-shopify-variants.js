@@ -37,6 +37,11 @@ function retrieveVariantAndLoadData(async, variant_id, variant_number) {
 function loadVariant(variant, variant_number) {
 	$("#variant_" + variant_number + "_header").html(variant.title);
 	$("#variant_" + variant_number + "_price").html(variant.price);
-	$("#variant_" + variant_number + "_requires_shipping").html(variant.requires_shipping);
+	$("#variant_" + variant_number + "_compare_at_price").html(variant.compare_at_price);
+	$("#variant_" + variant_number + "_requires_shipping").html(variant.requires_shipping.toString());
+	$("#variant_" + variant_number + "_sku").html(variant.sku);
 	$("#variant_" + variant_number + "_inventory_quantity").html(variant.inventory_quantity);
+	$("#variant_" + variant_number + "_inventory_management").html(variant.inventory_management);
+	$("#variant_" + variant_number + "_inventory_policy").html(variant.inventory_policy);
+	$("#variant_" + variant_number + "_taxable").html(variant.taxable.toString());
 }

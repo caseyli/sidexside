@@ -47,7 +47,6 @@ function loadProduct(product_id, product, product_number) {
 	/* TODO: Lots of repetiton here, refactor */
 	$("#product_" + product_number + "_header").html(product.title);
 	loadProductImage(product, "#product_" + product_number + "_image")
-	$("#product_" + product_number + "_title").html(editableProductTag(product_id, "title", product.title, product_number));
 	$("#product_" + product_number + "_handle").html(editableProductTag(product_id, "handle", product.handle, product_number));
 	$("#product_" + product_number + "_tags").html(editableProductTag(product_id, "tags", product.tags, product_number));
 	$("#product_" + product_number + "_product_type").html(editableProductTag(product_id, "product_type", product.product_type, product_number));

@@ -46,8 +46,11 @@ function retrieveProductImageAndLoad(product_id, image_tag) {
 function loadProduct(product_id, product, product_number) {
 	$("#product_" + product_number + "_header").html(product.title);
 	loadProductImage(product, "#product_" + product_number + "_image")
+	$("#product_" + product_number + "_title").html(editableTag(product_id, "title", product.title, product_number));
+	$("#product_" + product_number + "_handle").html(editableTag(product_id, "handle", product.handle, product_number));
+	$("#product_" + product_number + "_tags").html(editableTag(product_id, "tags", product.tags, product_number));
 	$("#product_" + product_number + "_product_type").html(editableTag(product_id, "product_type", product.product_type, product_number));
-	$("#product_" + product_number + "_price_range").html(product.price_range);
+	
 	$("#product_" + product_number + "_vendor").html(editableTag(product_id, "vendor", product.vendor, product_number));
 	$("#product_" + product_number + "_body_html").html(editableTag(product_id, "body_html", product.body_html, product_number));
 	

@@ -126,7 +126,7 @@ function swapInProductUpdateForm() {
 	    				refreshProduct(opposite_product_number.toString());
 	    			}
 	    			    		
-	    			element.parent().html(newText).live("dblclick", swapInProductUpdateForm);	
+	    			element.parent().html(newText).on("dblclick", swapInProductUpdateForm);	
 	    		}
 	    		else {
 					alert(data.message);	    			
@@ -146,7 +146,7 @@ function swapInProductUpdateForm() {
 		if(oldText == "") {
 			oldText = "&lt;double-click to edit&gt;";
 		}	
-		$(this).parent().html(oldText).bind("dblclick", swapInProductUpdateForm);
+		$(this).parent().html(oldText).on("dblclick", swapInProductUpdateForm);
 		return false;
 	});
 	

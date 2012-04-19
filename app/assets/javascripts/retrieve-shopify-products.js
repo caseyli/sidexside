@@ -71,35 +71,39 @@ function refreshProduct(product_number) {
 
 function swapInProductUpdateForm() {
 	/* Extract old value in case user cancels and to prefill form */
-	oldText = $(this).html().trim();
+	var oldText = $(this).html().trim();
 	if(oldText == "&lt;double-click to edit&gt;") {
 		oldText = "";
 	}
 	
 	/* Extract Key Name and Product ID for update */
-	keyName = $(this).data("key_name");
-	productId = $(this).data("product_id");
-	productNumber = parseInt($(this).data("product_number"));
+	var keyName = $(this).data("key_name");
+	var productId = $(this).data("product_id");
+	var productNumber = parseInt($(this).data("product_number"));
 	
 	/* IDs needed to capture cases when user edits multiple fields */
-	inputId = "input" + productId + "-" + keyName
-	saveId = "save" + productId + "-" + keyName
+	var inputId = "input" + productId + "-" + productNumber + "-" + keyName;
+	var oldInputId = "old-" + inputId;
+	var saveId = "save" + productId + "-" + productNumber + "-" + keyName;
+	var discardId = "discard" + productId + "-" + productNumber + "-" + keyName;
 	
 	/* Some fields should use text area */
-	inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';
+	var inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';
 	if(keyName == "body_html") {
 		inputTag = '<textarea id="' + inputId + '" class="editBox editable-textarea" value="" cols="60" rows="15""/>';
 	}
 	
+	var oldInputTag = '<input id="' + oldInputId + '" type="hidden" value="" />';
 	/* Display form */
 	$(this).html("").html(
 		'<form>' + 
-			inputTag +
+			inputTag + oldInputTag +
 		'</form>' +
 		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
-		'<a href="#" class="btnDiscard btn btn-danger">Cancel</a>'
+		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
 	$("#" +  inputId).val(oldText);
+	$("#" +  oldInputId).val(oldText);
 	$(this).off("dblclick", swapInProductUpdateForm);
 	
 	
@@ -107,8 +111,8 @@ function swapInProductUpdateForm() {
 	$("#" + saveId).on("click", function() {
 		
 		/* Extract new value and element that was clicked on */
-	    element = $(this);
-	    newText = element.siblings("form").children(".editBox").val();
+	    var element = $(this);
+	    var newText = element.siblings("form").children(".editBox").val();
 		
 		element.html("<img src='/ajax-loader-small.gif'> Saving...");
 		
@@ -142,7 +146,8 @@ function swapInProductUpdateForm() {
 	});
 
 	/* Add Event Handler for click on Cancel */
-	$(".btnDiscard").on("click", function() {	
+	$("#" + discardId).on("click", function() {	
+		oldText = $("#" + oldInputId).val();
 		if(oldText == "") {
 			oldText = "&lt;double-click to edit&gt;";
 		}	

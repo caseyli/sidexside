@@ -57,16 +57,18 @@ function swapInVariantUpdateForm() {
 	}
 	
 	/* Extract Key Name and Variant ID for update */
-	keyName = $(this).data("key_name");
-	variantId = $(this).data("variant_id");
-	variantNumber = parseInt($(this).data("variant_number"));
+	var keyName = $(this).data("key_name");
+	var variantId = $(this).data("variant_id");
+	var variantNumber = parseInt($(this).data("variant_number"));
 	
 	/* IDs needed to capture cases when user edits multiple fields */
-	inputId = "input" + variantId + "-" + keyName
-	saveId = "save" + variantId + "-" + keyName
+	var inputId = "input" + variantId + "-" + variantNumber + "-" + keyName
+	var oldInputId = "old-" + inputId;
+	var saveId = "save" + variantId + "-" + variantNumber + "-" + keyName
+	var discardId = "discard" + variantId + "-" + variantNumber + "-" + keyName;
 	
 	/* Some fields should use text area */
-	inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';
+	var inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';
 	if( (keyName == "requires_shipping") ||
 		(keyName == "taxable")
 	){
@@ -76,15 +78,20 @@ function swapInVariantUpdateForm() {
 			'</select>';
 	}
 	
+	var oldInputTag = '<input id="' + oldInputId + '" type="hidden" value="" />';
+	
 	/* Display form */
 	$(this).html("").html(
 		'<form>' + 
-			inputTag +
+			inputTag + oldInputTag +
 		'</form>' +
 		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-variant_id="' + variantId + '" data-key_name="' + keyName +'">Save</a> ' +
-		'<a href="#" class="btnDiscard btn btn-danger">Cancel</a>'
+		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
+	
 	$("#" +  inputId).val(oldText);
+	$("#" +  oldInputId).val(oldText);
+	
 	$(this).off("dblclick", swapInVariantUpdateForm);
 	
 	
@@ -92,8 +99,8 @@ function swapInVariantUpdateForm() {
 	$("#" + saveId).on("click", function() {
 		
 		/* Extract new value and element that was clicked on */
-	    element = $(this);
-	    newText = element.siblings("form").children(".editBox").val();
+	    var element = $(this);
+	    var newText = element.siblings("form").children(".editBox").val();
 		
 		element.html("<img src='/ajax-loader-small.gif'> Saving...");
 		
@@ -127,7 +134,8 @@ function swapInVariantUpdateForm() {
 	});
 
 	/* Add Event Handler for click on Cancel */
-	$(".btnDiscard").on("click", function() {		
+	$("#" + discardId).on("click", function() {
+		oldText = $("#" + oldInputId).val();		
 		if(oldText == "") {
 			oldText = "&lt;double-click to edit&gt;";
 		}

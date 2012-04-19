@@ -44,15 +44,15 @@ function retrieveProductImageAndLoad(product_id, image_tag) {
 
 
 function loadProduct(product_id, product, product_number) {
+	/* TODO: Lots of repetiton here, refactor */
 	$("#product_" + product_number + "_header").html(product.title);
 	loadProductImage(product, "#product_" + product_number + "_image")
-	$("#product_" + product_number + "_title").html(editableTag(product_id, "title", product.title, product_number));
-	$("#product_" + product_number + "_handle").html(editableTag(product_id, "handle", product.handle, product_number));
-	$("#product_" + product_number + "_tags").html(editableTag(product_id, "tags", product.tags, product_number));
-	$("#product_" + product_number + "_product_type").html(editableTag(product_id, "product_type", product.product_type, product_number));
-	
-	$("#product_" + product_number + "_vendor").html(editableTag(product_id, "vendor", product.vendor, product_number));
-	$("#product_" + product_number + "_body_html").html(editableTag(product_id, "body_html", product.body_html, product_number));
+	$("#product_" + product_number + "_title").html(editableProductTag(product_id, "title", product.title, product_number));
+	$("#product_" + product_number + "_handle").html(editableProductTag(product_id, "handle", product.handle, product_number));
+	$("#product_" + product_number + "_tags").html(editableProductTag(product_id, "tags", product.tags, product_number));
+	$("#product_" + product_number + "_product_type").html(editableProductTag(product_id, "product_type", product.product_type, product_number));
+	$("#product_" + product_number + "_vendor").html(editableProductTag(product_id, "vendor", product.vendor, product_number));
+	$("#product_" + product_number + "_body_html").html(editableProductTag(product_id, "body_html", product.body_html, product_number));
 	
 	/* TODO: This is an awful work around for event handlers being added twice */
 	$(".editable").off("dblclick", swapInProductUpdateForm);
@@ -73,6 +73,9 @@ function refreshProduct(product_number) {
 function swapInProductUpdateForm() {
 	/* Extract old value in case user cancels and to prefill form */
 	oldText = $(this).html().trim();
+	if(oldText == "&lt;double-click to edit&gt;") {
+		oldText = "";
+	}
 	
 	/* Extract Key Name and Product ID for update */
 	keyName = $(this).data("key_name");
@@ -117,17 +120,18 @@ function swapInProductUpdateForm() {
 	    	type: "PUT",
 	    	data: { key_name : $(this).data("key_name"), value : newText },
 	    	success: function(data, textStatus, jqXHR) {
-	    		
-				/* If displaying the same product, refresh the product */
-	    		opposite_product_number = productNumber%2 + 1;
-	    		if($("#product_1_id").val() == $("#product_2_id").val()) {
-	    			refreshProduct(opposite_product_number.toString());
-	    		}
+	    		if(data.result) {
+	    			/* If displaying the same product, refresh the product */
+	    			opposite_product_number = productNumber%2 + 1;
+	    			if($("#product_1_id").val() == $("#product_2_id").val()) {
+	    				refreshProduct(opposite_product_number.toString());
+	    			}
 	    			    		
-	    		element.parent().html(newText).live("dblclick", swapInProductUpdateForm);
-	    		
-				alert(data.message);
-	    		
+	    			element.parent().html(newText).live("dblclick", swapInProductUpdateForm);	
+	    		}
+	    		else {
+					alert(data.message);	    			
+	    		}
 	    	},
 	    	error: function(jqXHR, textStatus, errorThrown) {
 	    		element.html("Save");
@@ -139,7 +143,10 @@ function swapInProductUpdateForm() {
 	});
 
 	/* Add Event Handler for click on Cancel */
-	$(".btnDiscard").on("click", function() {		
+	$(".btnDiscard").on("click", function() {	
+		if(oldText == "") {
+			oldText = "&lt;double-click to edit&gt;";
+		}	
 		$(this).parent().html(oldText).bind("dblclick", swapInProductUpdateForm);
 		return false;
 	});
@@ -147,3 +154,13 @@ function swapInProductUpdateForm() {
 	return false;
 }
 
+function editableProductTag(product_id, key_name, innerHTML, product_number) {
+	if(innerHTML == "" || innerHTML == null) {
+		innerHTML = "&lt;double-click to edit&gt;";
+	}
+	return "<div class='editable' data-key_name='" + key_name + "' " +
+							     "data-product_id='" + product_id + "' " +
+							     "data-product_number='" + product_number + "'" +
+							     ">" + innerHTML + "</div>";
+	
+}

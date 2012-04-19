@@ -111,7 +111,7 @@ function swapInVariantUpdateForm() {
 	    				refreshVariant(opposite_variant_number.toString());
 	    			}
 	    			    		
-	    			element.parent().html(newText).live("dblclick", swapInVariantUpdateForm);	
+	    			element.parent().html(newText).on("dblclick", swapInVariantUpdateForm);	
 	    		}
 	    		else {
 	    			alert(data.message);	
@@ -131,7 +131,7 @@ function swapInVariantUpdateForm() {
 		if(oldText == "") {
 			oldText = "&lt;double-click to edit&gt;";
 		}
-		$(this).parent().html(oldText).bind("dblclick", swapInVariantUpdateForm);
+		$(this).parent().html(oldText).on("dblclick", swapInVariantUpdateForm);
 		return false;
 	});
 	

@@ -6,6 +6,12 @@
 				It's Simple! Choose 2 products to view information about each.
 			</p>
 		</div>
+		<div class="well">
+			<strong>Editing</strong>
+			<p>
+				You can also double-click the value of certain fields to edit them.
+			</p>
+		</div>
 	</div>
 	<div class="main-panel span10">
 		<%= form_tag "/compare_products", :method => "post" do %>
@@ -63,17 +69,17 @@
 	$(function(){
 		var products = retrieveProductsAndLoadSelect(false, ["#product_1_id", "#product_2_id"]);
 		
-		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
-		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
+		refreshProduct("1");
+		refreshProduct("2");
 	});
 	
 	$("#product_1_id").change(function(){
 		$("#product_1_header").html('<%= loader %>');
-		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
+		refreshProduct("1");
 	});
 	
 	$("#product_2_id").change(function(){
 		$("#product_2_header").html('<%= loader %>');
-		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
+		refreshProduct("2");
 	});
 </script>

@@ -12,6 +12,8 @@ Sidexside::Application.routes.draw do
   
   root :to                   => 'home#index'
 
+  resources :products
+
   match '/:controller/:action'
 
   # The priority is based upon order of creation:

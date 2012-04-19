@@ -94,8 +94,8 @@ function swapInProductUpdateForm() {
 		'<form>' + 
 			inputTag +
 		'</form>' +
-		'<a href="#" class="btnSave" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
-		'<a href="#" class="btnDiscard">Cancel</a>'
+		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
+		'<a href="#" class="btnDiscard btn btn-danger">Cancel</a>'
 	);
 	$("#" +  inputId).val(oldText);
 	$(this).off("dblclick", swapInProductUpdateForm);
@@ -107,7 +107,9 @@ function swapInProductUpdateForm() {
 		/* Extract new value and element that was clicked on */
 	    element = $(this);
 	    newText = element.siblings("form").children(".editBox").val();
-
+		
+		element.html("<img src='/ajax-loader-small.gif'> Saving...");
+		
 	    /* Make AJAX Call to update DB value */
 	    $.ajax({
 	    	url: "/products/" + $(this).data("product_id"),
@@ -128,6 +130,7 @@ function swapInProductUpdateForm() {
 	    		
 	    	},
 	    	error: function(jqXHR, textStatus, errorThrown) {
+	    		element.html("Save");
 	    		alert("Sorry, could not update your product information.");
 	    	}	
 	    });

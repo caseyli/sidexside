@@ -14,4 +14,17 @@ class ProductsController < ApplicationController
     respond_with @product
   end
   
+  def update
+    product = ShopifyAPI::Product.find(params[:id])
+    
+    product.update_attributes({ params[:key_name].to_sym => params[:value] })
+    product.save
+    
+    response = {:response => true, :message => "Updated #{product.title}'s #{params[:key_name]} with #{params[:value]}!"}
+    
+    respond_to do |format|
+      format.json { render :json => response.to_json }
+    end
+  end
+  
 end

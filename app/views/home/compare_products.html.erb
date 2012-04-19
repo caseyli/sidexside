@@ -6,6 +6,12 @@
 				It's Simple! Choose 2 products to view information about each.
 			</p>
 		</div>
+		<div class="well">
+			<strong>Editing</strong>
+			<p>
+				You can also double-click the value of certain fields to edit them.
+			</p>
+		</div>
 	</div>
 	<div class="main-panel span10">
 		<%= form_tag "/compare_products", :method => "post" do %>
@@ -34,14 +40,24 @@
 				<td><div class='center-block' id="product_2_image"></div></td>
 			</tr>
 			<tr>
+				<td><strong>Title: </strong></td>
+				<td id="product_1_title"></td>
+				<td id="product_2_title"></td>
+			</tr>
+			<tr>
+				<td><strong>Handle: </strong></td>
+				<td id="product_1_handle"></td>
+				<td id="product_2_handle"></td>
+			</tr>
+			<tr>
+			<td><strong>Tags: </strong></td>
+				<td id="product_1_tags"></td>
+				<td id="product_2_tags"></td>
+			</tr>
+			<tr>
 				<td><strong>Type: </strong></td>
 				<td id="product_1_product_type"></td>
 				<td id="product_2_product_type"></td>
-			</tr>
-			<tr>
-				<td><strong>Price Range: </strong></td>
-				<td id="product_1_price_range"></td>
-				<td id="product_2_price_range"></td>
 			</tr>
 			<tr>
 				<td><strong>Vendor: </strong></td>
@@ -63,17 +79,17 @@
 	$(function(){
 		var products = retrieveProductsAndLoadSelect(false, ["#product_1_id", "#product_2_id"]);
 		
-		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
-		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
+		refreshProduct("1");
+		refreshProduct("2");
 	});
 	
 	$("#product_1_id").change(function(){
 		$("#product_1_header").html('<%= loader %>');
-		retrieveProductAndLoadData(true, $("#product_1_id").val(), "1");
+		refreshProduct("1");
 	});
 	
 	$("#product_2_id").change(function(){
 		$("#product_2_header").html('<%= loader %>');
-		retrieveProductAndLoadData(true, $("#product_2_id").val(), "2");
+		refreshProduct("2");
 	});
 </script>

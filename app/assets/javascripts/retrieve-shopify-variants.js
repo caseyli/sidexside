@@ -39,7 +39,7 @@ function loadVariant(variant, variant_number) {
 	$("#variant_" + variant_number + "_compare_at_price").html(editableVariantTag(variant.id, "compare_at_price", variant.compare_at_price, variant_number));
 	$("#variant_" + variant_number + "_requires_shipping").html(editableVariantTag(variant.id, "requires_shipping", variant.requires_shipping.toString(), variant_number));
 	$("#variant_" + variant_number + "_sku").html(editableVariantTag(variant.id, "sku", variant.sku, variant_number));
-	$("#variant_" + variant_number + "_inventory_quantity").html(editableVariantTag(variant.id, "inventory_quantity", variant.inventory_quantity, variant_number));
+	$("#variant_" + variant_number + "_inventory_quantity").html(variant.inventory_quantity);
 	$("#variant_" + variant_number + "_inventory_management").html(editableVariantTag(variant.id, "inventory_management", variant.inventory_management, variant_number));
 	$("#variant_" + variant_number + "_inventory_policy").html(editableVariantTag(variant.id, "inventory_policy", variant.inventory_policy, variant_number));
 	$("#variant_" + variant_number + "_taxable").html(editableVariantTag(variant.id, "taxable", variant.taxable.toString(), variant_number));

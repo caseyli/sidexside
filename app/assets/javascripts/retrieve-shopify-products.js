@@ -168,11 +168,3 @@ function editableProductTag(product_id, key_name, innerHTML, product_number) {
 							     ">" + innerHTML + "</div>";
 	
 }
-
-function merge(product_number, key_name) {
-	$("#product_" + product_number + "_" + key_name).children(".editable").dblclick();
-	
-	var opposite_product_number = parseInt(product_number)%2 + 1;
-	var merge_value = $("#product_" + opposite_product_number.toString() + "_" + key_name).children(".editable").html();
-	$("#input-" + product_number + "-" + key_name).val(merge_value);
-}

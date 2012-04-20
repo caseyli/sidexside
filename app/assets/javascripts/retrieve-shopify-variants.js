@@ -62,10 +62,10 @@ function swapInVariantUpdateForm() {
 	var variantNumber = parseInt($(this).data("variant_number"));
 	
 	/* IDs needed to capture cases when user edits multiple fields */
-	var inputId = "input" + variantId + "-" + variantNumber + "-" + keyName
+	var inputId = "input" + "-" + variantNumber + "-" + keyName
 	var oldInputId = "old-" + inputId;
-	var saveId = "save" + variantId + "-" + variantNumber + "-" + keyName
-	var discardId = "discard" + variantId + "-" + variantNumber + "-" + keyName;
+	var saveId = "save" + "-" + variantNumber + "-" + keyName
+	var discardId = "discard" + "-" + variantNumber + "-" + keyName;
 	
 	/* Some fields should use text area */
 	var inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';

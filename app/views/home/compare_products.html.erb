@@ -45,8 +45,8 @@
 				<td><strong>Handle: </strong></td>
 				<td id="product_1_handle"></td>
 				<td>
-					<a class='btn merge-left' data-key_name='handle'>&lt;</a>
-					<a class='btn merge-right' data-key_name='handle'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='handle'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='handle'>&gt;</a>
 				</td>
 				<td id="product_2_handle"></td>
 			</tr>
@@ -54,8 +54,8 @@
 			<td><strong>Tags: </strong></td>
 				<td id="product_1_tags"></td>
 				<td>
-					<a class='btn merge-left' data-key_name='tags'>&lt;</a>
-					<a class='btn merge-right' data-key_name='tags'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='tags'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='tags'>&gt;</a>
 				</td>
 				<td id="product_2_tags"></td>
 			</tr>
@@ -63,8 +63,8 @@
 				<td><strong>Type: </strong></td>
 				<td id="product_1_product_type"></td>
 				<td>
-					<a class='btn merge-left' data-key_name='product_type'>&lt;</a>
-					<a class='btn merge-right' data-key_name='product_type'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='product_type'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='product_type'>&gt;</a>
 				</td>
 				<td id="product_2_product_type"></td>
 			</tr>
@@ -72,8 +72,8 @@
 				<td><strong>Vendor: </strong></td>
 				<td id="product_1_vendor"></td>
 				<td>
-					<a class='btn merge-left' data-key_name='vendor'>&lt;</a>
-					<a class='btn merge-right' data-key_name='vendor'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='vendor'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='vendor'>&gt;</a>
 				</td>
 				<td id="product_2_vendor"></td>
 			</tr>
@@ -81,8 +81,8 @@
 				<td><strong>Desc: </strong></td>
 				<td id="product_1_body_html"></td>
 				<td>
-					<a class='btn merge-left' data-key_name='body_html'>&lt;</a>
-					<a class='btn merge-right' data-key_name='body_html'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='body_html'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='body_html'>&gt;</a>
 				</td>
 				<td id="product_2_body_html"></td>
 			</tr>
@@ -110,11 +110,7 @@
 		refreshProduct("2");
 	});
 	
-	$(".merge-left").on("click", function(){
-		merge("product", "1", $(this).data("key_name"));
-	});
-	
-	$(".merge-right").on("click", function(){
-		merge("product", "2", $(this).data("key_name"));
+	$(".merge").on("click", function(){
+		merge("product", $(this).data("number"), $(this).data("key_name"));
 	});
 </script>

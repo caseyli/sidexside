@@ -8,9 +8,14 @@ function loadSelect(data, select_tag) {
 }
 
 function merge(type, number, key_name) {
+	/* Invoke Edit Box on Merge Value */
 	$("#" + type + "_" + number + "_" + key_name).children(".editable").dblclick();
 	
+	/* Replace Edit Box with value from opposite item */
 	var opposite_number = parseInt(number)%2 + 1;
 	var merge_value = $("#" + type + "_" + opposite_number.toString() + "_" + key_name).children(".editable").html();
 	$("#input-" + number + "-" + key_name).val(merge_value);
+	
+	/* Disable Merge Button */
+	
 }

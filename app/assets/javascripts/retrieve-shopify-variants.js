@@ -82,9 +82,9 @@ function swapInVariantUpdateForm() {
 	
 	/* Display form */
 	$(this).html("").html(
-		'<form>' + 
+		'<div class="field-form">' +
 			inputTag + oldInputTag +
-		'</form>' +
+		'</div>' +
 		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-variant_id="' + variantId + '" data-key_name="' + keyName +'">Save</a> ' +
 		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
@@ -100,7 +100,7 @@ function swapInVariantUpdateForm() {
 		
 		/* Extract new value and element that was clicked on */
 	    var element = $(this);
-	    var newText = element.siblings("form").children(".editBox").val();
+	    var newText = element.siblings(".field-form").children(".editBox").val();
 		
 		element.html("<img src='/ajax-loader-small.gif'> Saving...");
 		

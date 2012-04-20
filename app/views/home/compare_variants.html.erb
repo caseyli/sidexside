@@ -53,8 +53,8 @@
 				<td><strong>Price:</strong></td>
 				<td id='variant_1_price'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='price'>&lt;</a>
-					<a class='btn merge-right' data-key_name='price'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='price'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='price'>&gt;</a>
 				</td>
 				<td id='variant_2_price'></td>
 			</tr>
@@ -62,8 +62,8 @@
 				<td><strong>Compare at Price:</strong></td>
 				<td id='variant_1_compare_at_price'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='compare_at_price'>&lt;</a>
-					<a class='btn merge-right' data-key_name='compare_at_price'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='compare_at_price'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='compare_at_price'>&gt;</a>
 				</td>
 				<td id='variant_2_compare_at_price'></td>
 			</tr>
@@ -71,8 +71,8 @@
 				<td><strong>Weight(g):</strong></td>
 				<td id='variant_1_grams'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='grams'>&lt;</a>
-					<a class='btn merge-right' data-key_name='grams'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='grams'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='grams'>&gt;</a>
 				</td>
 				<td id='variant_2_grams'></td>
 			</tr>
@@ -80,8 +80,8 @@
 				<td><strong>SKU:</strong></td>
 				<td id='variant_1_sku'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='sku'>&lt;</a>
-					<a class='btn merge-right' data-key_name='sku'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='sku'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='sku'>&gt;</a>
 				</td>
 				<td id='variant_2_sku'></td>
 			</tr>
@@ -89,8 +89,8 @@
 				<td><strong>Taxable:</strong></td>
 				<td id='variant_1_taxable'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='taxable'>&lt;</a>
-					<a class='btn merge-right' data-key_name='taxable'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='taxable'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='taxable'>&gt;</a>
 				</td>
 				<td id='variant_2_taxable'></td>				
 			</tr>
@@ -98,8 +98,8 @@
 				<td><strong>Requires Shipping:</strong></td>
 				<td id='variant_1_requires_shipping'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='requires_shipping'>&lt;</a>
-					<a class='btn merge-right' data-key_name='requires_shipping'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='requires_shipping'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='requires_shipping'>&gt;</a>
 				</td>
 				<td id='variant_2_requires_shipping'></td>
 			</tr>
@@ -113,8 +113,8 @@
 				<td><strong>Inventory Management:</strong></td>
 				<td id='variant_1_inventory_management'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='inventory_management'>&lt;</a>
-					<a class='btn merge-right' data-key_name='inventory_management'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='inventory_management'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='inventory_management'>&gt;</a>
 				</td>
 				<td id='variant_2_inventory_management'></td>
 			</tr>
@@ -122,8 +122,8 @@
 				<td><strong>Inventory Policy:</strong></td>
 				<td id='variant_1_inventory_policy'></td>
 				<td>
-					<a class='btn merge-left' data-key_name='inventory_policy'>&lt;</a>
-					<a class='btn merge-right' data-key_name='inventory_policy'>&gt;</a>
+					<a class='btn merge' data-number="1" data-key_name='inventory_policy'>&lt;</a>
+					<a class='btn merge' data-number="2" data-key_name='inventory_policy'>&gt;</a>
 				</td>
 				<td id='variant_2_inventory_policy'></td>
 			</tr>
@@ -161,11 +161,7 @@
 		retrieveVariantAndLoadData(true, $("#variant_2_id").val(), "2");
 	});
 	
-	$(".merge-left").on("click", function(){
-		merge("variant", "1", $(this).data("key_name"));
-	});
-	
-	$(".merge-right").on("click", function(){
-		merge("variant", "2", $(this).data("key_name"));
+	$(".merge").on("click", function(){
+		merge("variant", $(this).data("number"), $(this).data("key_name"));
 	});
 </script>

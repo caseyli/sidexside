@@ -82,10 +82,10 @@ function swapInProductUpdateForm() {
 	var productNumber = parseInt($(this).data("product_number"));
 	
 	/* IDs needed to capture cases when user edits multiple fields */
-	var inputId = "input" + productId + "-" + productNumber + "-" + keyName;
+	var inputId = "input" + "-" + productNumber + "-" + keyName;
 	var oldInputId = "old-" + inputId;
-	var saveId = "save" + productId + "-" + productNumber + "-" + keyName;
-	var discardId = "discard" + productId + "-" + productNumber + "-" + keyName;
+	var saveId = "save" + "-" + productNumber + "-" + keyName;
+	var discardId = "discard" + "-" + productNumber + "-" + keyName;
 	
 	/* Some fields should use text area */
 	var inputTag = '<input id="' + inputId + '" type="text" class="editBox" value="" />';
@@ -96,9 +96,9 @@ function swapInProductUpdateForm() {
 	var oldInputTag = '<input id="' + oldInputId + '" type="hidden" value="" />';
 	/* Display form */
 	$(this).html("").html(
-		'<form>' + 
+		'<div class="field-form">' + 
 			inputTag + oldInputTag +
-		'</form>' +
+		'</div>' +
 		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
 		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
@@ -112,7 +112,7 @@ function swapInProductUpdateForm() {
 		
 		/* Extract new value and element that was clicked on */
 	    var element = $(this);
-	    var newText = element.siblings("form").children(".editBox").val();
+	    var newText = element.siblings(".field-form").children(".editBox").val();
 		
 		element.html("<img src='/ajax-loader-small.gif'> Saving...");
 		

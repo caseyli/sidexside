@@ -147,5 +147,10 @@
 		/* TODO: This is an awful work around for event handlers being added twice */
 		$(".editable").off("dblclick", swapInVariantUpdateForm);
 		$(".editable").on("dblclick", swapInVariantUpdateForm);
+		
+		/* Reenable any merge buttons of the opposite product that may have been disabled */
+		/* This is just a safety for using the Save-All and Discard-All button */
+		var opposite_variant_number = parseInt(variant_number)%2 + 1;
+		$(".merge-" + opposite_variant_number).show('100');
 	}
 </script>

@@ -59,6 +59,27 @@
 				<th class="compare-column" id='variant_2_header'><%= loader %></th>
 			</tr>
 			
+			<tr class="all-commands">
+				<td></td>
+				<td>
+					<div class='center-block'>
+						<a class='btn save-all-button btn-success' data-number="1">Save All</a>
+						<a class='btn discard-all-button btn-danger' data-number="1">Discard All</a>
+					</div>
+				</td>
+				<td>
+					<a class='btn btn-primary merge-all' data-number="1">&lt;</a>
+					<a class='btn btn-primary merge-all' data-number="2">&gt;</a>
+				</td>
+				<td>
+					<div class='center-block'>
+						<a class='btn save-all-button btn-success' data-number="2">Save All</a>
+						<a class='btn discard-all-button btn-danger' data-number="2">Discard All</a>
+					</div>
+				</td>
+			</tr>
+			
+			
 			<% @variant_keys.each do |variant_key| %>
 				<tr>
 					<td><strong><%= variant_key.friendly_name %>:</strong></td>
@@ -73,19 +94,7 @@
 				</tr>
 			<% end %>
 			
-			<tr>
-				<td></td>
-				<td>
-					<a class='btn save-all-button btn-success' data-number="1">Save All</a>
-					<a class='btn discard-all-button btn-danger' data-number="1">Discard All</a>
-				</td>
-				<td></td>
-				<td>
-					<a class='btn save-all-button btn-success' data-number="2">Save All</a>
-					<a class='btn discard-all-button btn-danger' data-number="2">Discard All</a>
-				</td>
-			</tr>
-			
+
 		</table>
 	</div>
 </div>
@@ -121,7 +130,9 @@
 	});
 	
 	$(".merge").on("click", function(){
-		merge("variant", $(this).data("number"), $(this).data("key_name"));
+		if($(this).is(":visible")) {
+			merge("variant", $(this).data("number"), $(this).data("key_name"));	
+		}
 	});
 	
 	$(".save-all-button").on("click", function(){
@@ -130,6 +141,10 @@
 	
 	$(".discard-all-button").on("click", function(){
 		discardAll($(this).data("number"));
+	});
+
+	$(".merge-all").on("click", function(){
+		mergeAll($(this).data("number"));
 	});
 	
 	/* TODO: Move this to the .js file once we figure out how to access @instance_variables in .js.erb files */

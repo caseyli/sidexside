@@ -32,7 +32,9 @@ function saveAll(number) {
 }
 
 function discardAll(number) {
-	if(confirm("Are you sure you want to discard all the unsaved changes?")) {
-		$(".btnDiscard-" + number).click();
-	}
+	$(".btnDiscard-" + number).click();
+}
+
+function mergeAll(number) {
+	$(".merge-" + number).click();
 }

@@ -12,6 +12,15 @@
 				You can also double-click the value of certain fields to edit them.
 			</p>
 		</div>
+		<div class="well">
+			<strong>Merging</strong>
+			<p>
+				Click on either of the merge buttons <br />
+				<a class='btn'>&lt;</a> <a class='btn'>&gt;</a><br />
+				to copy information from right-to-left or from left-to-right and then click on Save to
+				save those changes.
+			</p>
+		</div>
 	</div>
 	<div class="main-panel span10">
 		<%= form_tag "/compare_products", :method => "post" do %>
@@ -55,6 +64,19 @@
 					<td id="product_2_<%= product_key.key %>"></td>
 				</tr>
 			<% end %>
+			
+			<tr>
+				<td></td>
+				<td>
+					<a class='btn save-all-button btn-success' data-number="1">Save All</a>
+					<a class='btn discard-all-button btn-danger' data-number="1">Discard All</a>
+				</td>
+				<td></td>
+				<td>
+					<a class='btn save-all-button btn-success' data-number="2">Save All</a>
+					<a class='btn discard-all-button btn-danger' data-number="2">Discard All</a>
+				</td>
+			</tr>
 		</table>
 	</div>
 	<!-- main panel -->
@@ -81,6 +103,14 @@
 	
 	$(".merge").on("click", function(){
 		merge("product", $(this).data("number"), $(this).data("key_name"));
+	});
+	
+	$(".save-all-button").on("click", function(){
+		saveAll($(this).data("number"));
+	});
+	
+	$(".discard-all-button").on("click", function(){
+		discardAll($(this).data("number"));
 	});
 	
 	/* TODO: Move this to the .js file once we figure out how to access @instance_variables in .js.erb files */

@@ -23,3 +23,16 @@ function merge(type, number, key_name) {
 	$("#merge_" + opposite_number.toString() + "_" + key_name).hide("100");
 	
 }
+
+function saveAll(number) {
+	if(confirm("Are you sure you want to save all the unsaved changes?")) {
+		$(".btnSave-" + number).click();	
+	}
+	
+}
+
+function discardAll(number) {
+	if(confirm("Are you sure you want to discard all the unsaved changes?")) {
+		$(".btnDiscard-" + number).click();
+	}
+}

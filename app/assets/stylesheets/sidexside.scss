@@ -3,7 +3,6 @@
 .center-block {
   display:block;
   text-align: center;
-  padding: 10px 0 10px 0;
 }
 
 .center {
@@ -86,6 +85,13 @@
   
   tr:nth-child(even) {background: #CCC}
   tr:nth-child(odd) {background: #EEE}
+}
+
+tr.all-commands td {
+  background: #000044;
+  color: white;
+  border-top: 1px solid;
+  border-color: #CCCCCC;
 }
 
 .product-info {

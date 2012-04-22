@@ -19,6 +19,7 @@ function merge(type, number, key_name) {
 	}
 	$("#input-" + number + "-" + key_name).val(merge_value);
 	
-	/* Disable Merge Button */
+	/* Disable Opposite Merge Button */
+	$("#merge_" + opposite_number.toString() + "_" + key_name).hide("100");
 	
 }

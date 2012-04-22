@@ -84,8 +84,8 @@ function swapInProductUpdateForm() {
 		'<div class="field-form">' + 
 			inputTag + oldInputTag +
 		'</div>' +
-		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
-		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
+		'<a href="#" class="btnSave-' + productNumber + ' btn btn-success" id="' + saveId + '" data-product_id="' + productId + '" data-key_name="' + keyName +'">Save</a> ' +
+		'<a href="#" class="btnDiscard-' + productNumber + ' btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
 	$("#" +  inputId).val(oldText);
 	$("#" +  oldInputId).val(oldText);

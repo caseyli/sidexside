@@ -41,51 +41,20 @@
 				<td></td>
 				<td><div class='center-block' id="product_2_image"></div></td>
 			</tr>
-			<tr>
-				<td><strong>Handle: </strong></td>
-				<td id="product_1_handle"></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='handle'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='handle'>&gt;</a>
-				</td>
-				<td id="product_2_handle"></td>
-			</tr>
-			<tr>
-			<td><strong>Tags: </strong></td>
-				<td id="product_1_tags"></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='tags'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='tags'>&gt;</a>
-				</td>
-				<td id="product_2_tags"></td>
-			</tr>
-			<tr>
-				<td><strong>Type: </strong></td>
-				<td id="product_1_product_type"></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='product_type'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='product_type'>&gt;</a>
-				</td>
-				<td id="product_2_product_type"></td>
-			</tr>
-			<tr>
-				<td><strong>Vendor: </strong></td>
-				<td id="product_1_vendor"></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='vendor'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='vendor'>&gt;</a>
-				</td>
-				<td id="product_2_vendor"></td>
-			</tr>
-			<tr>
-				<td><strong>Desc: </strong></td>
-				<td id="product_1_body_html"></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='body_html'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='body_html'>&gt;</a>
-				</td>
-				<td id="product_2_body_html"></td>
-			</tr>
+			
+			<% @product_keys.each do |product_key| %>
+				<tr>
+					<td><strong><%= product_key.friendly_name %>: </strong></td>
+					<td id="product_1_<%= product_key.key %>"></td>
+					<td>
+						<% if product_key.editable %>
+							<a class='btn merge' data-number="1" data-key_name='<%= product_key.key %>'>&lt;</a>
+							<a class='btn merge' data-number="2" data-key_name='<%= product_key.key %>'>&gt;</a>
+						<% end %>
+					</td>
+					<td id="product_2_<%= product_key.key %>"></td>
+				</tr>
+			<% end %>
 		</table>
 	</div>
 	<!-- main panel -->

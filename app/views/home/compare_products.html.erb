@@ -48,8 +48,8 @@
 					<td id="product_1_<%= product_key.key %>"></td>
 					<td>
 						<% if product_key.editable %>
-							<a class='btn merge' data-number="1" data-key_name='<%= product_key.key %>'>&lt;</a>
-							<a class='btn merge' data-number="2" data-key_name='<%= product_key.key %>'>&gt;</a>
+							<a class='btn merge' id='merge_1_<%= product_key.key %>' data-number="1" data-key_name='<%= product_key.key %>'>&lt;</a>
+							<a class='btn merge' id='merge_2_<%= product_key.key %>' data-number="2" data-key_name='<%= product_key.key %>'>&gt;</a>
 						<% end %>
 					</td>
 					<td id="product_2_<%= product_key.key %>"></td>

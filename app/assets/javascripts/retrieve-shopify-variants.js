@@ -68,8 +68,8 @@ function swapInVariantUpdateForm() {
 		'<div class="field-form">' +
 			inputTag + oldInputTag +
 		'</div>' +
-		'<a href="#" class="btnSave btn btn-success" id="' + saveId + '" data-variant_id="' + variantId + '" data-key_name="' + keyName +'">Save</a> ' +
-		'<a href="#" class="btnDiscard btn btn-danger" id="' + discardId + '">Cancel</a>'
+		'<a href="#" class="btnSave-' + variantNumber + ' btn btn-success" id="' + saveId + '" data-variant_id="' + variantId + '" data-key_name="' + keyName +'">Save</a> ' +
+		'<a href="#" class="btnDiscard-' + variantNumber + ' btn btn-danger" id="' + discardId + '">Cancel</a>'
 	);
 	
 	$("#" +  inputId).val(oldText);
@@ -99,8 +99,11 @@ function swapInVariantUpdateForm() {
 	    			if($("#variant_1_id").val() == $("#variant_2_id").val()) {
 	    				refreshVariant(opposite_variant_number.toString());
 	    			}
-	    			    		
-	    			element.parent().html(newText).on("dblclick", swapInVariantUpdateForm);	
+	    			
+	    			element.parent().html(newText).on("dblclick", swapInVariantUpdateForm);
+	    			
+	    			/* Reenable any merge buttons that may have been disabled */
+					$("#merge_" + opposite_variant_number + "_" + keyName).show('100');	
 	    		}
 	    		else {
 	    			alert(data.message);	

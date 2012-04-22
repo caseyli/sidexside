@@ -82,4 +82,22 @@
 	$(".merge").on("click", function(){
 		merge("product", $(this).data("number"), $(this).data("key_name"));
 	});
+	
+	/* TODO: Move this to the .js file once we figure out how to access @instance_variables in .js.erb files */
+	function loadProduct(product_id, product, product_number) {
+		$("#product_" + product_number + "_header").html(product.title);
+		loadProductImage(product, "#product_" + product_number + "_image")
+		
+		<% @product_keys.each do |product_key| %>
+			<% if product_key.editable %>
+				$("#product_" + product_number + "_<%= product_key.key %>").html(editableProductTag(product_id, "<%= product_key.key %>", product.<%= product_key.key %>, product_number));		
+			<% else %>
+				$("#product_" + product_number + "_<%= product_key.key %>").html(product.<%= product_key.key %>);	
+			<% end %>
+		<% end %>
+		
+		/* TODO: This is an awful work around for event handlers being added twice */
+		$(".editable").off("dblclick", swapInProductUpdateForm);
+		$(".editable").on("dblclick", swapInProductUpdateForm);
+	}
 </script>

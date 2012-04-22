@@ -42,22 +42,6 @@ function retrieveProductImageAndLoad(product_id, image_tag) {
 	});
 }
 
-
-function loadProduct(product_id, product, product_number) {
-	/* TODO: Lots of repetiton here, refactor */
-	$("#product_" + product_number + "_header").html(product.title);
-	loadProductImage(product, "#product_" + product_number + "_image")
-	$("#product_" + product_number + "_handle").html(editableProductTag(product_id, "handle", product.handle, product_number));
-	$("#product_" + product_number + "_tags").html(editableProductTag(product_id, "tags", product.tags, product_number));
-	$("#product_" + product_number + "_product_type").html(editableProductTag(product_id, "product_type", product.product_type, product_number));
-	$("#product_" + product_number + "_vendor").html(editableProductTag(product_id, "vendor", product.vendor, product_number));
-	$("#product_" + product_number + "_body_html").html(editableProductTag(product_id, "body_html", product.body_html, product_number));
-	
-	/* TODO: This is an awful work around for event handlers being added twice */
-	$(".editable").off("dblclick", swapInProductUpdateForm);
-	$(".editable").on("dblclick", swapInProductUpdateForm);
-}
-
 function loadProductImage(product, image_tag) {
 	if(product.images.length > 0) {
 		ihtml = "<img src='" + product.images[0].src + "' class='product-image' />";

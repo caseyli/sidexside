@@ -31,24 +31,6 @@ function retrieveVariantAndLoadData(async, variant_id, variant_number) {
 	});
 }
 
-function loadVariant(variant, variant_number) {
-	/* TODO: Lots of repetiton here, refactor */
-	$("#variant_" + variant_number + "_header").html(editableVariantTag(variant.id, "title", variant.title, variant_number));
-	$("#variant_" + variant_number + "_price").html(editableVariantTag(variant.id, "price", variant.price, variant_number));
-	$("#variant_" + variant_number + "_grams").html(editableVariantTag(variant.id, "grams", variant.grams, variant_number));
-	$("#variant_" + variant_number + "_compare_at_price").html(editableVariantTag(variant.id, "compare_at_price", variant.compare_at_price, variant_number));
-	$("#variant_" + variant_number + "_requires_shipping").html(editableVariantTag(variant.id, "requires_shipping", variant.requires_shipping.toString(), variant_number));
-	$("#variant_" + variant_number + "_sku").html(editableVariantTag(variant.id, "sku", variant.sku, variant_number));
-	$("#variant_" + variant_number + "_inventory_quantity").html(variant.inventory_quantity);
-	$("#variant_" + variant_number + "_inventory_management").html(editableVariantTag(variant.id, "inventory_management", variant.inventory_management, variant_number));
-	$("#variant_" + variant_number + "_inventory_policy").html(editableVariantTag(variant.id, "inventory_policy", variant.inventory_policy, variant_number));
-	$("#variant_" + variant_number + "_taxable").html(editableVariantTag(variant.id, "taxable", variant.taxable.toString(), variant_number));
-	
-	/* TODO: This is an awful work around for event handlers being added twice */
-	$(".editable").off("dblclick", swapInVariantUpdateForm);
-	$(".editable").on("dblclick", swapInVariantUpdateForm);
-}
-
 function swapInVariantUpdateForm() {
 	/* Extract old value in case user cancels and to prefill form */
 	oldText = $(this).html().trim();

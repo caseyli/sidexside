@@ -57,8 +57,8 @@
 					<td id="product_1_<%= product_key.key %>"></td>
 					<td>
 						<% if product_key.editable %>
-							<a class='btn merge' id='merge_1_<%= product_key.key %>' data-number="1" data-key_name='<%= product_key.key %>'>&lt;</a>
-							<a class='btn merge' id='merge_2_<%= product_key.key %>' data-number="2" data-key_name='<%= product_key.key %>'>&gt;</a>
+							<a class='btn merge merge-1' id='merge_1_<%= product_key.key %>' data-number="1" data-key_name='<%= product_key.key %>'>&lt;</a>
+							<a class='btn merge merge-2' id='merge_2_<%= product_key.key %>' data-number="2" data-key_name='<%= product_key.key %>'>&gt;</a>
 						<% end %>
 					</td>
 					<td id="product_2_<%= product_key.key %>"></td>
@@ -129,5 +129,10 @@
 		/* TODO: This is an awful work around for event handlers being added twice */
 		$(".editable").off("dblclick", swapInProductUpdateForm);
 		$(".editable").on("dblclick", swapInProductUpdateForm);
+		
+		/* Reenable any merge buttons of the opposite product that may have been disabled */
+		/* This is just a safety for using the Save-All and Discard-All button */
+		var opposite_product_number = parseInt(product_number)%2 + 1;
+		$(".merge-" + opposite_product_number).show('100');
 	}
 </script>

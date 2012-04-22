@@ -79,7 +79,10 @@
 					<a class='btn save-all-button btn-success' data-number="1">Save All</a>
 					<a class='btn discard-all-button btn-danger' data-number="1">Discard All</a>
 				</td>
-				<td></td>
+				<td>
+					<a class='btn btn-primary merge-all' data-number="1">&lt;</a>
+					<a class='btn btn-primary merge-all' data-number="2">&gt;</a>
+				</td>
 				<td>
 					<a class='btn save-all-button btn-success' data-number="2">Save All</a>
 					<a class='btn discard-all-button btn-danger' data-number="2">Discard All</a>
@@ -130,6 +133,10 @@
 	
 	$(".discard-all-button").on("click", function(){
 		discardAll($(this).data("number"));
+	});
+
+	$(".merge-all").on("click", function(){
+		mergeAll($(this).data("number"));
 	});
 	
 	/* TODO: Move this to the .js file once we figure out how to access @instance_variables in .js.erb files */

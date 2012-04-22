@@ -55,8 +55,8 @@
 					<td id='variant_1_<%= variant_key.key %>'></td>
 					<td>
 						<% if variant_key.editable %>
-							<a class='btn merge' data-number="1" data-key_name='<%= variant_key.key %>'>&lt;</a>
-							<a class='btn merge' data-number="2" data-key_name='<%= variant_key.key %>'>&gt;</a>
+							<a class='btn merge' id='merge_1_<%= variant_key.key %>' data-number="1" data-key_name='<%= variant_key.key %>'>&lt;</a>
+							<a class='btn merge' id='merge_2_<%= variant_key.key %>' data-number="2" data-key_name='<%= variant_key.key %>'>&gt;</a>
 						<% end %>
 					</td>
 					<td id='variant_2_<%= variant_key.key %>'></td>

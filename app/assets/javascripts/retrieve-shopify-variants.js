@@ -42,6 +42,7 @@ function swapInVariantUpdateForm() {
 	var keyName = $(this).data("key_name");
 	var variantId = $(this).data("variant_id");
 	var variantNumber = parseInt($(this).data("variant_number"));
+	var opposite_variant_number = variantNumber%2 + 1;
 	
 	/* IDs needed to capture cases when user edits multiple fields */
 	var inputId = "input" + "-" + variantNumber + "-" + keyName
@@ -95,7 +96,6 @@ function swapInVariantUpdateForm() {
 	    	success: function(data, textStatus, jqXHR) {
 	    		if(data.result) {
 	    			/* If displaying the same variants, refresh the variant */
-	    			opposite_variant_number = variantNumber%2 + 1;
 	    			if($("#variant_1_id").val() == $("#variant_2_id").val()) {
 	    				refreshVariant(opposite_variant_number.toString());
 	    			}
@@ -122,6 +122,10 @@ function swapInVariantUpdateForm() {
 			oldText = "&lt;double-click to edit&gt;";
 		}
 		$(this).parent().html(oldText).on("dblclick", swapInVariantUpdateForm);
+		
+		/* Reenable any merge buttons that may have been disabled */
+		$("#merge_" + opposite_variant_number + "_" + keyName).show('100');
+		
 		return false;
 	});
 	

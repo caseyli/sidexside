@@ -49,84 +49,19 @@
 				<th></th>
 				<th class="compare-column" id='variant_2_header'><%= loader %></th>
 			</tr>
-			<tr>
-				<td><strong>Price:</strong></td>
-				<td id='variant_1_price'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='price'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='price'>&gt;</a>
-				</td>
-				<td id='variant_2_price'></td>
-			</tr>
-			<tr>
-				<td><strong>Compare at Price:</strong></td>
-				<td id='variant_1_compare_at_price'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='compare_at_price'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='compare_at_price'>&gt;</a>
-				</td>
-				<td id='variant_2_compare_at_price'></td>
-			</tr>
-			<tr>
-				<td><strong>Weight(g):</strong></td>
-				<td id='variant_1_grams'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='grams'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='grams'>&gt;</a>
-				</td>
-				<td id='variant_2_grams'></td>
-			</tr>
-			<tr>
-				<td><strong>SKU:</strong></td>
-				<td id='variant_1_sku'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='sku'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='sku'>&gt;</a>
-				</td>
-				<td id='variant_2_sku'></td>
-			</tr>
-			<tr>
-				<td><strong>Taxable:</strong></td>
-				<td id='variant_1_taxable'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='taxable'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='taxable'>&gt;</a>
-				</td>
-				<td id='variant_2_taxable'></td>				
-			</tr>
-			<tr>
-				<td><strong>Requires Shipping:</strong></td>
-				<td id='variant_1_requires_shipping'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='requires_shipping'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='requires_shipping'>&gt;</a>
-				</td>
-				<td id='variant_2_requires_shipping'></td>
-			</tr>
-			<tr>
-				<td><strong>Inventory Quantity:</strong></td>
-				<td id='variant_1_inventory_quantity'></td>
-				<td></td>
-				<td id='variant_2_inventory_quantity'></td>
-			</tr>
-			<tr>
-				<td><strong>Inventory Management:</strong></td>
-				<td id='variant_1_inventory_management'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='inventory_management'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='inventory_management'>&gt;</a>
-				</td>
-				<td id='variant_2_inventory_management'></td>
-			</tr>
-			<tr>
-				<td><strong>Inventory Policy:</strong></td>
-				<td id='variant_1_inventory_policy'></td>
-				<td>
-					<a class='btn merge' data-number="1" data-key_name='inventory_policy'>&lt;</a>
-					<a class='btn merge' data-number="2" data-key_name='inventory_policy'>&gt;</a>
-				</td>
-				<td id='variant_2_inventory_policy'></td>
-			</tr>
+			<% @variant_keys.each do |variant_key| %>
+				<tr>
+					<td><strong><%= variant_key.friendly_name %>:</strong></td>
+					<td id='variant_1_<%= variant_key.key %>'></td>
+					<td>
+						<% if variant_key.editable %>
+							<a class='btn merge' data-number="1" data-key_name='<%= variant_key.key %>'>&lt;</a>
+							<a class='btn merge' data-number="2" data-key_name='<%= variant_key.key %>'>&gt;</a>
+						<% end %>
+					</td>
+					<td id='variant_2_<%= variant_key.key %>'></td>
+				</tr>
+			<% end %>
 		</table>
 	</div>
 </div>

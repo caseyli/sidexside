@@ -17,10 +17,12 @@ class HomeController < ApplicationController
   
   def compare_products
     @header_message = '<strong>Compare Products</strong>'
+    @product_keys = ProductKey.all
   end
   
   def compare_variants
     @header_message = '<strong>Compare Variants</strong>'
+    @variant_keys = VariantKey.all
   end
   
 end

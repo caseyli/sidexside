@@ -114,7 +114,10 @@ function swapInProductUpdateForm() {
 	    				refreshProduct(opposite_product_number.toString());
 	    			}
 	    			    		
-	    			element.parent().html(newText).on("dblclick", swapInProductUpdateForm);	
+	    			element.parent().html(newText).on("dblclick", swapInProductUpdateForm);
+	    			
+	    			/* Reenable any merge buttons that may have been disabled */
+					$("#merge_" + opposite_product_number + "_" + keyName).show('100');	
 	    		}
 	    		else {
 					alert(data.message);	    			

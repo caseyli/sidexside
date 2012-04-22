@@ -124,6 +124,14 @@
 		merge("variant", $(this).data("number"), $(this).data("key_name"));
 	});
 	
+	$(".save-all-button").on("click", function(){
+		saveAll($(this).data("number"));
+	});
+	
+	$(".discard-all-button").on("click", function(){
+		discardAll($(this).data("number"));
+	});
+	
 	/* TODO: Move this to the .js file once we figure out how to access @instance_variables in .js.erb files */
 	function loadVariant(variant, variant_number) {
 		$("#variant_" + variant_number + "_header").html(editableVariantTag(variant.id, "title", variant.title, variant_number));

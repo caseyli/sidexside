@@ -64,6 +64,7 @@ function swapInProductUpdateForm() {
 	var keyName = $(this).data("key_name");
 	var productId = $(this).data("product_id");
 	var productNumber = parseInt($(this).data("product_number"));
+	var opposite_product_number = productNumber%2 + 1;
 	
 	/* IDs needed to capture cases when user edits multiple fields */
 	var inputId = "input" + "-" + productNumber + "-" + keyName;
@@ -109,7 +110,6 @@ function swapInProductUpdateForm() {
 	    	success: function(data, textStatus, jqXHR) {
 	    		if(data.result) {
 	    			/* If displaying the same product, refresh the product */
-	    			opposite_product_number = productNumber%2 + 1;
 	    			if($("#product_1_id").val() == $("#product_2_id").val()) {
 	    				refreshProduct(opposite_product_number.toString());
 	    			}
@@ -136,6 +136,10 @@ function swapInProductUpdateForm() {
 			oldText = "&lt;double-click to edit&gt;";
 		}	
 		$(this).parent().html(oldText).on("dblclick", swapInProductUpdateForm);
+		
+		/* Reenable any merge buttons that may have been disabled */
+		$("#merge_" + opposite_product_number + "_" + keyName).show('100');
+		
 		return false;
 	});
 	

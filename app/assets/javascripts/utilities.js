@@ -36,3 +36,7 @@ function discardAll(number) {
 		$(".btnDiscard-" + number).click();
 	}
 }
+
+function mergeAll(number) {
+	$(".merge-" + number).click();
+}

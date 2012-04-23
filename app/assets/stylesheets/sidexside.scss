@@ -11,6 +11,7 @@
 
 .btn-mega {
   font-size: 4em;
+  line-height: 2em;
 }
 
 /* Product Select Form */
@@ -120,4 +121,20 @@ ul.product-info li:nth-child(odd) {
 
 ul.product-info li:nth-child(even) { 
   background-color:#EEEEEE; 
+}
+
+/* Help Page */
+dl.help dt {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+dl.help dd {
+  margin-bottom: 40px;
+  line-height: 3em;
+}
+
+
+/* Feedback page */
+.feedback {
+  width: 500px;
 }

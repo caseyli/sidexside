@@ -1,0 +1,29 @@
+<div class='row'>
+	<div class='span2'>
+		<div class='well'>
+			Welcome to the feedback page. if there's anything at all you want to express, suggestions,
+			questions, or general comments, please submit them.
+		</div>
+	</div>
+	<div class='span10'>
+		<h2>Feedback</h2>
+		<br/>
+		<% if !@success %>
+			<%= form_tag "/feedback" do %>
+				<div class="field">
+					<%= label_tag :email_address, "Your E-Mail Address" %>
+					<%= text_field_tag :email_address, nil, :size => "30" %>
+				</div>
+				<div class="field">
+					<%= label_tag :message, "Message" %>
+					<%= text_area_tag :message, nil, :rows => 10, :class => "feedback" %>
+				</div>
+				<div class="actions">
+					<%= submit_tag "Submit" %>
+				</div>
+			<% end %>
+		<% else %>
+			<%= label_tag :success_message, "Your message has been sent. Thank you for your feedback." %>
+		<% end %>
+	</div>
+</div>

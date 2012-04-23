@@ -10,6 +10,10 @@ Sidexside::Application.routes.draw do
   match '/compare_products'  => 'home#compare_products'
   match '/compare_variants'  => 'home#compare_variants'
   
+  match '/help' => 'home#help'
+  match '/feedback' => 'home#feedback'
+  match '/about' => 'home#about'
+  
   root :to                   => 'home#index'
 
   resources :products

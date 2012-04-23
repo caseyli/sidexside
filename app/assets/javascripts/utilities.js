@@ -24,11 +24,32 @@ function merge(type, number, key_name) {
 	
 }
 
-function saveAll(number) {
-	if(confirm("Are you sure you want to save all the unsaved changes?")) {
-		$(".btnSave-" + number).click();	
+function saveAll(number, type) {
+	/* Create message */
+	var item_name = "";
+	if(number == 1) {
+		item_name = "the " + type + " on the left"
 	}
+	else {
+		item_name = "the " + type + " on the right"
+	}
+	$("#modal-item-name").html(item_name);
 	
+	/* Attach handler to close button */
+	$("#modal-close").on("click", function(){
+		hideSaveAllModal();
+	});
+	
+	/* Attach handler to save button */
+	$("#modal-saveAll").on("click", function(){
+		$(".btnSave-" + number).click();
+		hideSaveAllModal();
+	});
+	
+	/* Show modal */
+	$('#saveAllModal').modal('show');
+	
+	return false;
 }
 
 function discardAll(number) {
@@ -37,4 +58,12 @@ function discardAll(number) {
 
 function mergeAll(number) {
 	$(".merge-" + number).click();
+}
+
+function hideSaveAllModal() {
+	$("#saveAllModal").modal("hide");
+		
+	/* Remove handlers so there is no conflict in Product 1 and Product 2 saving */
+	$("#modal-close").off("click");
+	$("#modal-saveAll").off("click");
 }

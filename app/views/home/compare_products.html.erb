@@ -90,6 +90,9 @@
 	<!-- main panel -->
 </div><!-- row -->
 
+<%= render 'save_all_modal' %>
+
+
 <!-- TODO: Move this to approropiate file later -->
 <script type="text/javascript">
 	$(function(){
@@ -116,7 +119,7 @@
 	});
 	
 	$(".save-all-button").on("click", function(){
-		saveAll($(this).data("number"));
+		saveAll($(this).data("number"), "product");
 	});
 	
 	$(".discard-all-button").on("click", function(){

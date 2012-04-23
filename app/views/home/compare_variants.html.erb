@@ -98,6 +98,9 @@
 		</table>
 	</div>
 </div>
+
+<%= render 'save_all_modal' %>
+
 <script type='text/javascript'>
 	$(function() {
 		retrieveProductsAndLoadSelect(false, ["#product_id"]);
@@ -136,7 +139,7 @@
 	});
 	
 	$(".save-all-button").on("click", function(){
-		saveAll($(this).data("number"));
+		saveAll($(this).data("number"), "variant");
 	});
 	
 	$(".discard-all-button").on("click", function(){

@@ -1,0 +1,152 @@
+<div class="row">
+	<div class="span2">
+		<div class="well">
+			Be sure to visit our <%= link_to "feedback", "/feedback" %> page if there's something you can't figure out.
+		</div>
+	</div>
+	<div class="span10">
+		<dl class='help'>
+			<dt>Comparing Products</dt>
+			<dd>
+				To compare products, visit the Compare Products Page. Once there, your products will appear in the product
+				selection box. <strong>Note that in this beta phase, only your first 100 products will be available.</strong>
+				Select your first product from the dropdown list and then select your second product from the other dropdown list.
+				You'll be able to view details about each product side by side.
+				
+				<div class="product-select">
+					<table class="product-select-table">
+						<tr class="product-select-row">
+							<td class="criteria-column"></td>
+							<td class="product-column"> <%= label_tag :product_1_id %>
+								<%= select_tag :product_1_id,
+									options_for_select([["Porsche 911", "Porsche 911"],["Aston Martin", "Aston Martin"],["Audi R8", "Audi R8"]]) %> 
+							</td>
+							<td class="product-column"> <%= label_tag :product_2_id %>
+							<%= select_tag :product_2_id,
+								options_for_select([["Porsche 911", "Porsche 911"],["Aston Martin", "Aston Martin"],["Audi R8", "Audi R8"]]) %>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				
+			</dd>
+			
+			<dt>Comparing Variants</dt>
+			<dd>
+				To compare products, visit the Compare Variants Page. Once there, your products will appear in the product
+				selection box, and variants for the product will show up in the variant selection box.
+				<strong>Note that in this beta phase, only your first 100 products will be available.</strong>
+				Select your product from the dropdown list. Once selected, the variants for that product will show up
+				in the variant selection box. Select your first variant from the dropdown list and then select your second variant
+				from the other dropdown list. You'll be able to view the details about each variant side by side.
+				
+						<div class="product-select">
+							<table class="product-select-table">
+								<tr class="product-select-row">
+									<td class="criteria-column"></td>
+									<td class="product-column"> <%= label_tag :product_id %>
+										<%= select_tag :product_id,
+											options_for_select([["Porsche 911", "Porsche 911"],["Aston Martin", "Aston Martin"],["Audi R8", "Audi R8"]]) %> 
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="variant-select">
+							<table class="product-select-table">
+								<tr class="product-select-row">
+									<td class="criteria-column"></td>
+									<td class="product-column"> <%= label_tag :variant_1_id %>
+									<%= select_tag :variant_1_id, 
+										options_for_select([["Turbo", "Turbo"], ["Carrera 2", "Carrera 2"], ["Carrera 4", "Carrera 4"], ["Carrera 4S", "Carrera 4S"], ["Targa", "Targa"]])
+									%>
+									</td>
+									<td class="product-column"> <%= label_tag :variant_2_id %>
+									<%= select_tag :variant_2_id,
+										options_for_select([["Turbo", "Turbo"], ["Carrera 2", "Carrera 2"], ["Carrera 4", "Carrera 4"], ["Carrera 4S", "Carrera 4S"], ["Targa", "Targa"]])
+									%>
+									<br/>
+									</td>
+								</tr>
+							</table>
+						</div>
+				
+			</dd>
+			
+			<dt>Editing Details</dt>
+			<dd>
+				Both in the Compare Products and the Compare Variants pages, you can edit some information. To edit information
+				about a product or variant, <strong>simply double-click on the value</strong>. For example, if the vendor of your product is "Shopify",
+				double-click on "Shopify". A text field will show up where you can enter the new information. After you have filled
+				out the new informaiton, click on <a class='btn btn-success'>Save</a> to save your changes. If you decide you do not want to change any information,
+				simply click on <a class='btn btn-danger'>Cancel</a>.
+			</dd>
+			
+			<dt>Save All and Discard All</dt>
+			<dd>
+				If you decide you want to edit several fields without clicking <a class='btn btn-success'>Save</a> in between each one, you can take advantage of the
+				<a class='btn btn-success'>Save All</a> button. You can double-click several values to edit information about your product or variant. Fill in the new information
+				about your product and variant, but you don't have to hit <a class='btn btn-success'>Save</a> between each one. Fill in all your information, and then
+				when you're done, click the <a class='btn btn-success'>Save All</a> button located at the top of the table. All your information will be saved.
+				If you decide you want to cancel all your changes, you can simply click on the <a class='btn btn-danger'>Discard All</a> button.
+			</dd>
+			
+			<dt>Merging</dt>
+			<dd>
+				One of the powerful features of SIDEXSIDE is the ability to merge information from one product or variant to another. For
+				example, let's say you have a product that you've written a nice long description about and want to use it for another product. This
+				is where SIDEXSIDE's Merging functionality comes into play. Simply click either of the merge buttons
+				<a class='btn'>&lt;</a> <a class='btn'>&gt;</a> to merge the information from
+				left-to-right or from right-to-left. This will put one of your product's or variant's details into edit mode and pre-fill the field
+				with the other product or variant's information. Feel free to make any changes before you hit <a class='btn btn-success'>Save</a>.
+				When you are finished, simply
+				click on <a class='btn btn-success'>Save</a> and you're done. If you decide you don't want to keep the changes, simply click on
+				<a class='btn btn-danger'>Cancel</a>.
+			</dd>
+			
+			<dt>Merge All</dt>
+			<dd>
+				Just like <a class='btn btn-success'>Save All</a> and <a class='btn btn-danger'>Discard All</a>, you can use the
+				Merge All buttons.
+				buttons to save you time. By clicking on either of the Merge All <a class='btn btn-primary'>&lt;</a> <a class='btn btn-primary'>&gt;</a> buttons,
+				you will copy all the information from right-to-left or from left-to-right. If you decide you want to keep all the changes, click on 
+				<a class='btn btn-success'>Save All</a>. If you decide you want to cancel the merge, simply click on <a class='btn btn-danger'>Discard All</a>.
+				You can also cancel select fields and save others.
+			</dd>
+		</dl>		
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("#product_id").change(function(){
+		var product = $("#product_id").val().toString();
+		var options = "";
+		switch(product) {
+			case "Porsche 911":
+				options = "<option value'1'>Turbo</option>" +
+						  "<option value'2'>Carrera 2</option>" +
+						  "<option value'3'>Carrera 4</option>" +
+						  "<option value'4'>Carrera 4S</option>" +
+						  "<option value'5'>Targa</option>";
+				break;
+			case "Aston Martin":
+				options = "<option value'1'>DB9</option>" +
+						  "<option value'2'>DBS</option>" +
+						  "<option value'3'>V12 Vantage</option>" +
+						  "<option value'4'>V12 Zagato</option>" +
+						  "<option value'5'>Virage</option>";
+				break;
+			case "Audi R8":
+				options = "<option value'1'>V8</option>" +
+						  "<option value'2'>V10</option>" +
+						  "<option value'3'>V8 Spyder</option>" +
+						  "<option value'4'>V10 Spyder</option>";
+				break;
+		}
+		
+		$("#variant_1_id").html(options);
+		$("#variant_2_id").html(options);
+	});
+</script>

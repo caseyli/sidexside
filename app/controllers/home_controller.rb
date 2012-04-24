@@ -1,10 +1,14 @@
 class HomeController < ApplicationController
   
-  around_filter :shopify_session, :except => 'welcome'
+  around_filter :shopify_session, :except => ['welcome', 'beta', 'feedback']
   
   def welcome
     current_host = "#{request.host}#{':' + request.port.to_s if request.port != 80}"
     @callback_url = "http://#{current_host}/login/finalize"
+  end
+  
+  def beta
+    @header_message = '<strong>Welcome Beta Testers!</strong>'
   end
   
   def index

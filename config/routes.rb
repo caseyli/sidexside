@@ -13,6 +13,7 @@ Sidexside::Application.routes.draw do
   match '/help' => 'home#help'
   match '/feedback' => 'home#feedback'
   match '/about' => 'home#about'
+  match '/beta' => 'home#beta'
   
   root :to                   => 'home#index'
 
